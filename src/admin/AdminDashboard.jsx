@@ -114,7 +114,7 @@ const AdminDashboard = () => {
                   </span>
                 </div>
 
-                {/* Placeholder for right-side icon or menu button */}
+                {/* Menu Icon Text */}
                 <div className="text-gray-400 text-xl font-bold">⋯</div>
               </li>
             ))}
