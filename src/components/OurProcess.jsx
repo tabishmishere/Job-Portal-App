@@ -5,7 +5,7 @@ import CurvedDottedArrow from "./CurvedDottedArrow";
 
 const OurProcess = () => {
   return (
-    <div>
+    <div className="min-h-screen flex flex-col items-center justify-center">
       <h2 className="text-3xl sm:text-4xl lg:text-6xl text-center font-bold text-black mt-12 leading-snug mb-12 selection:bg-green-500 selection:text-white">
         How our <span className="text-green-500 italic">process</span> works?
       </h2>
