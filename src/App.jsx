@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar";
 import Header from "./components/Header";
 import Login from "./pages/Login";
 import Signup from "./pages/SignUp";
-import Dashboard from "./admin/AdminDashboard";
+import Dashboard from "./admin/RecruiterDashboard";
 import JobManagement from "./admin/JobManagement";
 import UserManagement from "./admin/UserManagement";
 import ApplicationOverview from "./admin/ApplicationOverview";

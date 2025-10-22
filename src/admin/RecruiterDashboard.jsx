@@ -7,7 +7,7 @@ import tkxelLogo from "../assets/tkxel_logo.jpg";
 import googleLogo from "../assets/google-logo.png";
 import xevenLogo from "../assets/xeven-logo.jpg";
 import dubizzleLogo from "../assets/dubizzle-logo.png";
-import Sidebar from "./DashboardSidebar";
+import Sidebar from "./RecruiterSidebar";
 
 const AdminDashboard = () => {
   const [postedJobs, setPostJobs] = useState([
@@ -49,7 +49,7 @@ const AdminDashboard = () => {
   ]);
   return (
     <div className="flex min-h-screen">
-      <div className="w-64 h-full min-h-screen bg-white shadow-lg p-6 hidden md:block">
+      <div className="min-h-screen p-6 hidden md:block rounded-xl mt-10">
         <Sidebar/>
       </div>
       <div className="flex-1 p-8 bg-dashboard bg-[rgba(211,239,224,0.3)] rounded-xl shadow-lg mt-10 min-h-screen">
