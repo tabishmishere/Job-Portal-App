@@ -48,7 +48,7 @@ const AdminDashboard = () => {
     },
   ]);
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen ">
       <div className="min-h-screen p-6 hidden md:block rounded-xl mt-10">
         <Sidebar/>
       </div>

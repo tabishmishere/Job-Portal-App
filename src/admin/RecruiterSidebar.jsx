@@ -56,7 +56,7 @@ const RecruiterSidebar = () => {
         </ul>
       </nav>
 
-      {/* Bottom: Profile Progress + Logout */}
+      {/* Profile Progress + Logout */}
       <div className="p-4 border-t">
         <div className="mb-4">
           <p className="text-sm text-gray-600">Profile Complete</p>
