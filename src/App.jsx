@@ -7,9 +7,11 @@ import Signup from "./pages/SignUp";
 import Dashboard from "./admin/RecruiterDashboard";
 import JobManagement from "./admin/JobManagement";
 import UserManagement from "./admin/UserManagement";
+import AddJob from "./admin/AddJob";
 import ApplicationOverview from "./admin/ApplicationOverview";
 import Footer from "./components/Footer";
 import Testimonial from "./components/Testimonial";
+import Profile from "./admin/Profile";
 
 const AppContent = () => {
   const location = useLocation();
@@ -30,6 +32,8 @@ const AppContent = () => {
         <Route path="/admin/job-management" element={<JobManagement />} />
         <Route path="/admin/user-management" element={<UserManagement />} />
         <Route path="/admin/all-applicants" element={<ApplicationOverview />} />
+        <Route path="/admin/add-job" element={<AddJob />} />
+        <Route path="/admin/profile" element={<Profile />} />
       </Routes>
 
       {showLandingExtras && (
