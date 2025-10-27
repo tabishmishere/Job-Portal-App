@@ -128,14 +128,14 @@ const Jobs = () => {
             </button>
           </div>
         </div>
-        <br/>
+        <br />
         <div>
           {/* 4. Filter and Job List Section (20% / 80% Split) */}
           <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:space-x-8">
-            {/* Filter Sidebar (20% Width) */}  
+            {/* Filter Sidebar (20% Width) */}
             <aside className="md:w-1/5 bg-white p-6 rounded-xl border-black border shadow-sm mb-8 md:mb-0">
               <h2 className="text-xl font-semibold mb-4">Filters</h2>
-              {/* Filter Options (e.g., Job Type, Experience Level, etc.) */}   
+              {/* Filter Options (e.g., Job Type, Experience Level, etc.) */}
               <div className="space-y-4">
                 <div>
                   <h3 className="font-semibold mb-2">Job Type</h3>

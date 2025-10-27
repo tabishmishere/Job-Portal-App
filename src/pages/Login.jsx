@@ -40,9 +40,9 @@ const Signup = () => {
 
           <div className="text-center text-sm">
             <p className="text-gray-600">
-              Already have an account?{" "}
-              <Link to="/login" className="text-green-500 hover:underline">
-                Click here
+              Don’t have an account?{" "}
+              <Link to="/sign-up" className="text-green-500 hover:underline">
+                Sign up
               </Link>
             </p>
           </div>

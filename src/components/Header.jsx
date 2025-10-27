@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import OurProcess from "./OurProcess";
 import { FaArrowRightLong } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [popularJobs, setPopularJobs] = useState([
@@ -10,6 +11,7 @@ const Header = () => {
     "UI/UX",
     "Video Editing",
   ]);
+
   return (
     <>
       <header className="selection:bg-green-500 selection:text-white bg-gradient-to-r from-green-100 to-white py-16 px-6 min-h-screen flex items-center justify-center">
@@ -23,13 +25,15 @@ const Header = () => {
             companies worldwide and make your next big move.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 mb-10 w-full sm:w-auto justify-center">
-            <button className="bg-green-600 flex items-center justify-center gap-3 cursor-pointer text-white px-6 py-3 rounded-full text-lg font-semibold hover:bg-green-700 transition duration-200">
-              Get started{" "}
-              <span>
-                {" "}
-                <FaArrowRightLong />
-              </span>
-            </button>
+            <Link
+      to="/sign-up"
+      className="bg-green-600 flex items-center justify-center gap-3 cursor-pointer text-white px-6 py-3 rounded-full text-lg font-semibold hover:bg-green-700 transition duration-200"
+    >
+      Get started{" "}
+      <span>
+        <FaArrowRightLong />
+      </span>
+    </Link>
             <button className="border border-green-600 cursor-pointer text-green-600 px-6 py-3 rounded-full text-lg font-semibold hover:bg-green-600 hover:text-white transition duration-200">
               Try demo
             </button>
