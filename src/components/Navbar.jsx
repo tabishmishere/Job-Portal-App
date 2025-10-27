@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Login from "../pages/Login";
-import { HashLink } from 'react-router-hash-link'
+import { HashLink } from "react-router-hash-link";
 
 const Navbar = () => {
   return (
@@ -20,14 +19,14 @@ const Navbar = () => {
             Home
           </Link>
           <HashLink
-  smooth
-  to="/#how-our-process-work"
-  className="text-gray-700 hover:text-green-600 transition duration-300"
->
-  How It Works
-</HashLink>
+            smooth
+            to="/#how-our-process-work"
+            className="text-gray-700 hover:text-green-600 transition duration-300"
+          >
+            How It Works
+          </HashLink>
           <HashLink
-          smooth
+            smooth
             to="#testimoniallink"
             className="text-gray-700 hover:text-green-600 transition duration-300"
           >
@@ -51,7 +50,9 @@ const Navbar = () => {
           <Link
             to="/login"
             className="border border-gray-300 cursor-pointer text-gray-700 py-2 px-5 rounded-full hover:border-green-500 hover:text-green-600 transition duration-300"
-          >Login</Link>
+          >
+            Login
+          </Link>
         </div>
       </div>
     </nav>
