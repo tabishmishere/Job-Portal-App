@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Login from "../pages/Login";
+import { HashLink } from 'react-router-hash-link'
 
 const Navbar = () => {
   return (
     <nav className="p-4">
-      <div className="container mx-auto flex justify-around items-center fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-white/70 p-4 transition duration-300">
+      <div className="flex justify-around items-center fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-white/70 p-4 transition duration-300">
         <div className="text-black text-3xl font-bold flex items-center space-x-1">
           <span>Jobi</span>
           <span className="text-green-500">.</span>
@@ -18,18 +19,20 @@ const Navbar = () => {
           >
             Home
           </Link>
-          <Link
-            to="/features"
+          <HashLink
+  smooth
+  to="/#how-our-process-work"
+  className="text-gray-700 hover:text-green-600 transition duration-300"
+>
+  How It Works
+</HashLink>
+          <HashLink
+          smooth
+            to="#testimoniallink"
             className="text-gray-700 hover:text-green-600 transition duration-300"
           >
-            Features
-          </Link>
-          <Link
-            to="/about"
-            className="text-gray-700 hover:text-green-600 transition duration-300"
-          >
-            About
-          </Link>
+            Reviews
+          </HashLink>
           <Link
             to="/dashboard"
             className="text-gray-700 hover:text-green-600 transition duration-300"

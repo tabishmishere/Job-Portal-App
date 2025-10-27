@@ -21,7 +21,7 @@ const testimonials = [
 
 const Testimonial = () => {
   return (
-    <section className="selection:bg-green-500 selection:text-white bg-gradient-to-r from-green-100 to-white min-h-screen flex items-center justify-center px-4 py-20">
+    <section id="testimoniallink" className="selection:bg-green-500 selection:text-white bg-gradient-to-r from-green-100 to-white min-h-screen flex items-center justify-center px-4 py-20">
       <div className="max-w-6xl w-full text-center">
         <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-black mb-4">
           What Our <span className="text-green-500 italic ">Users</span> Say!
