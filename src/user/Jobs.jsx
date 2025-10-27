@@ -56,6 +56,42 @@ const Jobs = () => {
           <p className="text-lg text-gray-500 mt-2">
             Discover opportunities that match your passion
           </p>
+        </div><div className="text-center mb-10 mt-8">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 flex items-center justify-center">
+            {/* Gray Briefcase Icon (Inline SVG) */}
+            <BriefcaseIcon className="w-8 h-8 md:w-10 md:h-10 mr-3 text-gray-500" />
+            Find your Dream Job Here!
+          </h1>
+          <p className="text-lg text-gray-500 mt-2">
+            Discover opportunities that match your passion
+          </p>
+        </div><div className="text-center mb-10 mt-8">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 flex items-center justify-center">
+            {/* Gray Briefcase Icon (Inline SVG) */}
+            <BriefcaseIcon className="w-8 h-8 md:w-10 md:h-10 mr-3 text-gray-500" />
+            Find your Dream Job Here!
+          </h1>
+          <p className="text-lg text-gray-500 mt-2">
+            Discover opportunities that match your passion
+          </p>
+        </div><div className="text-center mb-10 mt-8">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 flex items-center justify-center">
+            {/* Gray Briefcase Icon (Inline SVG) */}
+            <BriefcaseIcon className="w-8 h-8 md:w-10 md:h-10 mr-3 text-gray-500" />
+            Find your Dream Job Here!
+          </h1>
+          <p className="text-lg text-gray-500 mt-2">
+            Discover opportunities that match your passion
+          </p>
+        </div><div className="text-center mb-10 mt-8">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 flex items-center justify-center">
+            {/* Gray Briefcase Icon (Inline SVG) */}
+            <BriefcaseIcon className="w-8 h-8 md:w-10 md:h-10 mr-3 text-gray-500" />
+            Find your Dream Job Here!
+          </h1>
+          <p className="text-lg text-gray-500 mt-2">
+            Discover opportunities that match your passion
+          </p>
         </div>
 
         {/* Search Bar Container */}
