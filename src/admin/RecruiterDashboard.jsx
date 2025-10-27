@@ -48,11 +48,11 @@ const AdminDashboard = () => {
     },
   ]);
   return (
-    <div className="flex min-h-screen ">
-      <div className="min-h-screen p-6 hidden md:block rounded-xl mt-10">
+    <div className="flex min-h-screen">
+      {/* <div className="min-h-screen p-6 hidden md:block rounded-xl mt-10">
         <Sidebar/>
-      </div>
-      <div className="flex-1 p-8 bg-dashboard bg-[rgba(211,239,224,0.3)] rounded-xl shadow-lg mt-10 min-h-screen">
+      </div> */}
+      <div className="flex-1 p-8 bg-dashboard bg-[rgba(211,239,224,0.3)] rounded-xl shadow-lg min-h-screen">
         {" "}
         {/* Dashboard Header */}
         <div className="flex justify-between items-center mb-8">

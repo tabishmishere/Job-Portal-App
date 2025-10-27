@@ -1,46 +1,70 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
+
+// Components
 import Navbar from "./components/Navbar";
 import Header from "./components/Header";
-import Login from "./pages/Login";
-import Signup from "./pages/SignUp";
-import Dashboard from "./admin/RecruiterDashboard";
-import JobManagement from "./admin/JobManagement";
-import UserManagement from "./admin/UserManagement";
-import AddJob from "./admin/AddJob";
-import ApplicationOverview from "./admin/ApplicationOverview";
 import Footer from "./components/Footer";
 import Testimonial from "./components/Testimonial";
+
+// Recruiter Pages
+import Dashboard from "./admin/RecruiterDashboard";
+import JobManagement from "./admin/JobManagement";
+import AddJob from "./admin/AddJob";
+import ApplicationOverview from "./admin/ApplicationOverview";
 import Profile from "./admin/Profile";
-import Jobs from "./user/Jobs"
+import RecruiterLayout from "./layout/RecruiterLayout";
+
+// User Pages
+import Jobs from "./user/Jobs";
+
+// Auth Pages
+import Login from "./pages/Login";
+import Signup from "./pages/SignUp";
+
 const AppContent = () => {
   const location = useLocation();
 
-  // Only show testimonial & footer on the landing page ("/")
+  // Hide Navbar on Dashboard routes
+  const isDashboardRoute = location.pathname.startsWith("/dashboard");
   const showLandingExtras = location.pathname === "/";
 
   return (
     <>
-      <Navbar />
+      {!isDashboardRoute && <Navbar />}
+
       <Routes>
+        {/* Public Routes */}
         <Route path="/" element={<Header />} />
-        <Route path="/features" element={<div>Features</div>} />
-        <Route path="/about" element={<div>About</div>} />
-        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/sign-up" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/admin/job-management" element={<JobManagement />} />
-        <Route path="/admin/user-management" element={<UserManagement />} />
-        <Route path="/admin/all-applicants" element={<ApplicationOverview />} />
-        <Route path="/admin/add-job" element={<AddJob />} />
-        <Route path="/admin/profile" element={<Profile />} />
+
+        {/* Recruiter (Dashboard) Routes */}
+        <Route path="/dashboard" element={<RecruiterLayout />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard/job-management" element={<JobManagement />} />
+          <Route
+            path="/dashboard/all-applicants"
+            element={<ApplicationOverview />}
+          />
+          <Route path="/dashboard/add-job" element={<AddJob />} />
+          <Route path="/dashboard/profile" element={<Profile />} />
+        </Route>
+
+        {/* User Routes */}
         <Route path="/user/jobs" element={<Jobs />} />
       </Routes>
 
+      {/* Only show testimonial & footer on landing page */}
       {showLandingExtras && (
         <>
           <Testimonial />
-          <Footer />  
+          <Footer />
         </>
       )}
     </>

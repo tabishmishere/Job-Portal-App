@@ -2,7 +2,10 @@ import React from "react";
 
 const Profile = () => {
   return (
-    <div className="mt-10 p-6 min-h-screen bg-gray-50">
+    <div className="rounded-xl p-10 min-h-screen  bg-[rgba(211,239,224,0.3)]">
+      <h2 className="text-3xl mb-5 sm:text-4xl font-bold text-green-900">
+        Recruiter Profile
+      </h2>
       <div className="max-w-5xl mx-auto bg-white shadow-md rounded-2xl p-8">
         <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
