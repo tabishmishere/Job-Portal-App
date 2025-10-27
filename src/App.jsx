@@ -12,7 +12,7 @@ import ApplicationOverview from "./admin/ApplicationOverview";
 import Footer from "./components/Footer";
 import Testimonial from "./components/Testimonial";
 import Profile from "./admin/Profile";
-
+import Jobs from "./user/Jobs"
 const AppContent = () => {
   const location = useLocation();
 
@@ -34,12 +34,13 @@ const AppContent = () => {
         <Route path="/admin/all-applicants" element={<ApplicationOverview />} />
         <Route path="/admin/add-job" element={<AddJob />} />
         <Route path="/admin/profile" element={<Profile />} />
+        <Route path="/user/jobs" element={<Jobs />} />
       </Routes>
 
       {showLandingExtras && (
         <>
           <Testimonial />
-          <Footer />
+          <Footer />  
         </>
       )}
     </>
