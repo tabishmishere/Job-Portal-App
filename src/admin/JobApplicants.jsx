@@ -74,7 +74,6 @@ const JobApplicants = () => {
                 <th className="py-4 px-6 text-left font-medium text-gray-900">Id</th>
                 <th className="py-4 px-6 text-left font-medium text-gray-900">User Name</th>
                 <th className="py-4 px-6 text-left font-medium text-gray-900">Job Title</th>
-                <th className="py-4 px-6 text-left font-medium text-gray-900">Date</th>
                 <th className="py-4 px-6 text-left font-medium text-gray-900">Location</th>
                 <th className="py-4 px-6 text-left font-medium text-gray-900">No of Jobs</th>
                 <th className="py-4 px-6 text-left font-medium text-gray-900">Status</th>
