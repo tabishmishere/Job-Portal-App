@@ -1,10 +1,60 @@
 import React, { useState } from 'react';
 import { MdDelete } from 'react-icons/md';
 import { FaEdit } from 'react-icons/fa';
+import JobForm from "../components/Admin/JobForm";
 
 const JobApplicants = () => {
-  const [postedJobs, setPostedJobs] = useState([]);
+  const [postedJobs, setPostedJobs] = useState([
+    {
+      id: 1,
+      userName: 'Azan Atif',
+      title: "DevOps",
+      location: 'Lahore',
+      applicants: 25,
+      status: 'Accepted',
+    },
+    {
+      id: 2,
+      userName: 'Arsal Majid',
+      title: "Mern Stack Developer",
+      location: 'Lahore',
+      applicants: 18,
+      status: 'Rejected',
+    },
+    {
+      id: 3,
+      userName: 'Muhammad Asad',
+      title: "QA Engineer",
+      location: 'Islamabad',
+      applicants: 30,
+      status: 'Accepted',
+    },
+    {
+      id: 4,
+      userName: 'Ahmad Majid',
+      title: "Frontend Developer",
+      location: 'Karachi',
+      applicants: 12,
+      status: 'Rejected',
+    },
+    {
+      id: 5,
+      userName: 'Muhammad Asad',
+      title: "Backend Developer",
+      location: 'Lahore',
+      applicants: 7,
+      status: 'Accepted',
+    },
+  ]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleStatusChange = (id, status) => {
+    setPostedJobs((prevJobs) =>
+      prevJobs.map((job) =>
+        job.id === id ? { ...job, status: status } : job
+      )
+    );
+  };
 
   return (
     <div className="flex-1 p-4 sm:p-8 bg-[rgba(211,239,224,0.3)] rounded-xl shadow-lg min-h-screen">
@@ -22,37 +72,47 @@ const JobApplicants = () => {
             <thead>
               <tr>
                 <th className="py-4 px-6 text-left font-medium text-gray-900">Id</th>
+                <th className="py-4 px-6 text-left font-medium text-gray-900">User Name</th>
                 <th className="py-4 px-6 text-left font-medium text-gray-900">Job Title</th>
                 <th className="py-4 px-6 text-left font-medium text-gray-900">Date</th>
                 <th className="py-4 px-6 text-left font-medium text-gray-900">Location</th>
                 <th className="py-4 px-6 text-left font-medium text-gray-900">No of Jobs</th>
-                <th className="py-4 px-6 text-left font-medium text-gray-900">Actions</th>
+                <th className="py-4 px-6 text-left font-medium text-gray-900">Status</th>
               </tr>
             </thead>
             <tbody>
               {postedJobs.length > 0 ? (
                 postedJobs.map((job) => (
                   <tr key={job.id} className="border-t hover:bg-gray-100 transition-all">
+                    <td className="py-4 px-6 text-gray-800">{job.id}</td>
+                    <td className="py-4 px-6 text-gray-800">{job.userName}</td>
                     <td className="py-4 px-6 text-gray-800">{job.title}</td>
-                    <td className="py-4 px-6 text-gray-600">{job.date}</td>
                     <td className="py-4 px-6 text-gray-600">{job.location}</td>
                     <td className="py-4 px-6 text-gray-600">{job.applicants}</td>
+                    <td className="py-4 px-6 text-gray-600">
+                      <span className={job.status === 'Accepted' ? 'text-green-600' : 'text-red-600'}>
+                        {job.status}
+                      </span>
+                    </td>
                     <td className="py-4 px-6">
                       <div className="flex space-x-4">
-                        <button className="text-gray-600 hover:text-red-600 transition-all">
-                          <MdDelete className="text-xl" />
-                        </button>
-                        <button className="text-gray-600 hover:text-green-600 transition-all">
-                          <FaEdit className="text-xl" />
-                        </button>
+                        <select
+                          value={job.status}
+                          onChange={(e) => handleStatusChange(job.id, e.target.value)}
+                          className="bg-white text-sm text-gray-700 border border-gray-300 rounded-md shadow-sm"
+                        >
+                          <option value="Accepted">Accept</option>
+                          <option value="Rejected">Reject</option>
+                        </select>
+                        
                       </div>
                     </td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan="6" className="text-center text-gray-500">
-                    No jobs posted yet.
+                  <td colSpan="7" className="text-center text-gray-500">
+                    No job applicants yet.
                   </td>
                 </tr>
               )}
@@ -62,41 +122,46 @@ const JobApplicants = () => {
 
         {/* Mobile View */}
         <div className="block md:hidden p-4 space-y-4">
-          {postedJobs.map((job) => (
-            <div key={job.id} className="bg-gray-50 rounded-lg p-4 shadow border border-gray-200">
-              <div className="mb-2">
-                <p className="text-sm text-gray-500">Job Title</p>
-                <p className="text-base font-semibold text-gray-800">{job.title}</p>
+          {postedJobs.length > 0 ? (
+            postedJobs.map((job) => (
+              <div key={job.id} className="bg-gray-50 rounded-lg p-4 shadow border border-gray-200">
+                <div className="mb-2">
+                  <p className="text-sm text-gray-500">Job Title</p>
+                  <p className="text-base font-semibold text-gray-800">{job.userName}</p>
+                </div>
+                <div className="mb-2">
+                  <p className="text-sm text-gray-500">Location</p>
+                  <p className="text-base text-gray-700">{job.location}</p>
+                </div>
+                <div className="mb-2">
+                  <p className="text-sm text-gray-500">Applicants</p>
+                  <p className="text-base text-gray-700">{job.applicants}</p>
+                </div>
+                <div className="mb-2">
+                  <p className="text-sm text-gray-500">Status</p>
+                  <span className={job.status === 'Accepted' ? 'text-green-600' : 'text-red-600'}>
+                    {job.status}
+                  </span>
+                </div>
+                <div className="flex space-x-4 pt-2">
+                  <select
+                    value={job.status}
+                    onChange={(e) => handleStatusChange(job.id, e.target.value)}
+                    className="bg-white text-sm text-gray-700 border border-gray-300 rounded-md shadow-sm"
+                  >
+                    <option value="Accepted">Accept</option>
+                    <option value="Rejected">Reject</option>
+                  </select>
+                </div>
               </div>
-              <div className="mb-2">
-                <p className="text-sm text-gray-500">Date</p>
-                <p className="text-base text-gray-700">{job.date}</p>
-              </div>
-              <div className="mb-2">
-                <p className="text-sm text-gray-500">Location</p>
-                <p className="text-base text-gray-700">{job.location}</p>
-              </div>
-              <div className="mb-2">
-                <p className="text-sm text-gray-500">Applicants</p>
-                <p className="text-base text-gray-700">{job.applicants}</p>
-              </div>
-              <div className="flex space-x-4 pt-2">
-                <button className="text-gray-600 hover:text-red-600 transition-all">
-                  <MdDelete className="text-xl" />
-                </button>
-                <button className="text-gray-600 hover:text-green-600 transition-all">
-                  <FaEdit className="text-xl" />
-                </button>
-              </div>
+            ))
+          ) : (
+            <div className="text-center text-gray-500">
+              No job applicants yet.
             </div>
-          ))}
+          )}
         </div>
       </div>
-
-      {/* Modal for posting job */}
-      {isModalOpen && (
-        <JobForm setPostedJobs={setPostedJobs} setIsModalOpen={setIsModalOpen} />
-      )}
     </div>
   );
 };

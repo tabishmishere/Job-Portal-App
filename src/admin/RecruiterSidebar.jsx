@@ -76,7 +76,7 @@ const RecruiterSidebar = () => {
           <span className="text-xs text-gray-500 mt-1 inline-block">70%</span>
         </div>
 
-        <button className="flex items-center gap-4 w-full cursor-pointer px-5 py-3 rounded-xl text-gray-700 font-medium hover:text-red-600 hover:bg-red-50 transition-all">
+        <button className="flex items-center gap-4 mb-10 w-full cursor-pointer px-5 py-3 rounded-xl text-gray-700 font-medium hover:text-red-600 hover:bg-red-50 transition-all">
           <FaSignOutAlt className="text-xl" />
           Logout
         </button>
