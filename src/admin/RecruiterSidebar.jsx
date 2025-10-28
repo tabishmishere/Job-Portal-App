@@ -29,7 +29,7 @@ const RecruiterSidebar = () => {
       {/* User Info */}
       <div className="p-6 text-center border-b">
         <img
-          src="https://media.licdn.com/dms/image/v2/D4D35AQGVkKY68QYoYg/profile-framedphoto-shrink_800_800/B4DZoGJisUKQAg-/0/1761039756368?e=1761760800&v=beta&t=W5zw5qxW7qlAg5XfxPH24Cu94hl7XpNPco7OwQUh8IA"
+          src="https://media.licdn.com/dms/image/v2/D4D35AQE6TxKWU9n4Ug/profile-framedphoto-shrink_400_400/B4DZoaSfWcGkAc-/0/1761377646288?e=1762250400&v=beta&t=8BypDEAGYsgIv1e-xje2btNduKo3BgT48fuzdvh3fD0"
           alt="User"
           className="w-20 h-20 mx-auto rounded-full border-4 border-[#b6ef72]"
         />

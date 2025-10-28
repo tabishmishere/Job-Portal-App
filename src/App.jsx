@@ -16,7 +16,7 @@ import Testimonial from "./components/Testimonial";
 import Dashboard from "./admin/RecruiterDashboard";
 import JobManagement from "./admin/JobManagement";
 import AddJob from "./admin/AddJob";
-import ApplicationOverview from "./admin/ApplicationOverview";
+import JobApplicants from "./admin/JobApplicants";
 import Profile from "./admin/Profile";
 import RecruiterLayout from "./layout/RecruiterLayout";
 
@@ -49,8 +49,8 @@ const AppContent = () => {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/dashboard/job-management" element={<JobManagement />} />
           <Route
-            path="/dashboard/all-applicants"
-            element={<ApplicationOverview />}
+            path="/dashboard/applicants"
+            element={<JobApplicants />}
           />
           <Route path="/dashboard/add-job" element={<AddJob />} />
           <Route path="/dashboard/profile" element={<Profile />} />

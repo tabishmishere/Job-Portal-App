@@ -3,7 +3,7 @@ import React from "react";
 const AddJob = () => {
   return (
     <div className="p-6 min-h-screen bg-[rgba(211,239,224,0.3)]">
-      <h2 className="text-3xl mb-5 sm:text-4xl font-bold text-green-900">
+      <h2 className="text-3xl ml-5 mt-5 mb-2 sm:text-4xl font-bold text-green-900">
         Add Job
       </h2>
       <div className="max-w-5xl mt-10 mx-auto bg-white shadow-md rounded-2xl p-8">
