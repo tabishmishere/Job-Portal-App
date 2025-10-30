@@ -1,15 +1,43 @@
 import React, { useState } from "react";
 import { FaUser, FaEnvelope, FaLock } from "react-icons/fa";
 import { Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 const Signup = () => {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(name, email, password);
+
+    const userData = { name, email, password };
+
+    try {
+      const res = await fetch("http://localhost:5000/api/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        // alert("Signup successful!");
+        console.log(data);
+        navigate("/user/jobs");
+        
+        // Optionally redirect to login
+        // window.location.href = "/login";
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Something went wrong!");
+    }
   };
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
