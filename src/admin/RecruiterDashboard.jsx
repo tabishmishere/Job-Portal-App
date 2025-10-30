@@ -48,15 +48,15 @@ const AdminDashboard = () => {
     },
   ]);
   return (
-    <div className="flex min-h-screen ">
-      <div className="min-h-screen p-6 hidden md:block rounded-xl mt-10">
+    <div className="flex min-h-screen">
+      {/* <div className="min-h-screen p-6 hidden md:block rounded-xl mt-10">
         <Sidebar/>
-      </div>
-      <div className="flex-1 p-8 bg-dashboard bg-[rgba(211,239,224,0.3)] rounded-xl shadow-lg mt-10 min-h-screen">
+      </div> */}
+      <div className="flex-1 p-8 bg-dashboard bg-[rgba(211,239,224,0.3)] rounded-xl shadow-lg min-h-screen">
         {" "}
         {/* Dashboard Header */}
         <div className="flex justify-between items-center mb-8">
-          <h2 className="text-4xl font-bold text-green-900">Dashboard</h2>
+          <h2 className="text-4xl font-bold text-green-900">Recruiter Dashboard</h2>
           <div className="flex space-x-4 items-center">
             <button className="bg-green-900 hover:bg-white hover:text-green-900 translate-all duration-300 cursor-pointer text-white font-semibold py-2 px-4 rounded-full shadow-sm">
               Post a Job

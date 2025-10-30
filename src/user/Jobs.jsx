@@ -95,7 +95,7 @@ const Jobs = () => {
               <h2 className="text-xl font-semibold mb-4 text-gray-800">
                 Filters
               </h2>
-              <hr  className="mb-4"/>
+              <hr className="mb-4" />
               {/* Filter Options (e.g., Job Type, Experience Level, etc.) */}
               <div className="space-y-4">
                 <div>
@@ -137,9 +137,7 @@ const Jobs = () => {
                 </span>
               </h2>
               <div className="text-center p-10 bg-white rounded-2xl border border-gray-200 shadow-md">
-                <p className="text-lg text-gray-500">
-                  Loading dream jobs...
-                </p>
+                <p className="text-lg text-gray-500">Loading dream jobs...</p>
               </div>
             </section>
           </div>

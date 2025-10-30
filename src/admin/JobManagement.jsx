@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import JobForm from "../components/Admin/JobForm";
+import { getAllJobs } from "../api/JobApi.jsx";
 
 const JobManagement = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -29,9 +30,21 @@ const JobManagement = () => {
       applicants: 10,
     },
   ]);
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const response = await getAllJobs();
+        setPostedJobs(response.data.jobs);
+      } catch (error) {
+        console.error("Error fetching jobs:", error);
+      }
+    };
+
+    fetchJobs();
+  }, []);
 
   return (
-    <div className="flex-1 p-4 sm:p-8 bg-dashboard bg-[rgba(211,239,224,0.3)] rounded-xl shadow-lg mt-10 min-h-screen">
+    <div className="flex-1 p-4 sm:p-8 bg-[rgba(211,239,224,0.3)] rounded-xl  shadow-lg min-h-screen">
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
         <h2 className="text-3xl sm:text-4xl font-bold text-green-900">
