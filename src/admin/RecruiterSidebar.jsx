@@ -13,7 +13,7 @@ const RecruiterSidebar = () => {
     { name: "My Profile", icon: <IoPersonSharp className="font-bold text-2xl" />, path: "/dashboard/profile" },
     { name: "Add Job", icon: <FaCirclePlus className="font-bold text-2xl" />, path: "/dashboard/add-job" },
     {
-      name: "My Jobs",
+      name: "Manage Jobs",
       icon: <FaBriefcase className="font-bold text-2xl" />,
       path: "/dashboard/job-management",
     },
