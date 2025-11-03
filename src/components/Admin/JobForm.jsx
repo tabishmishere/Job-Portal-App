@@ -1,79 +1,84 @@
 import React, { useState } from "react";
+import { updateJob } from "../../api/JobApi.jsx";
 
-const JobForm = ({ setPostedJobs, setIsModalOpen }) => {
+const JobForm = ({ job, onClose, onJobUpdated }) => {
   const [formData, setFormData] = useState({
-    title: "",
-    date: "",
-    location: "",
-    applicants: 0,
+    title: job.title || "",
+    company:
+      typeof job.company === "object" ? job.company?.name || "" : job.company || "",
+    location: job.location || "",
+    datePosted: job.datePosted
+      ? new Date(job.datePosted).toISOString().split("T")[0]
+      : new Date(job.createdAt).toISOString().split("T")[0],
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setPostedJobs((prev) => [...prev, { id: prev.length + 1, ...formData }]);
-    setIsModalOpen(false);
+
+    try {
+      const updatedData = {
+        title: formData.title,
+        company: formData.company,
+        location: formData.location,
+        datePosted: formData.datePosted,
+      };
+
+      const { data } = await updateJob(job._id, updatedData);
+      onJobUpdated(data.job);
+      onClose();
+    } catch (error) {
+      console.error("Error updating job:", error);
+      alert("Failed to update job");
+    }
   };
 
   return (
-    <div className="fixed inset-0 z-50  bg-opacity-30 backdrop-blur-sm flex justify-center items-center">
-      <div className="bg-white rounded-lg p-6 w-full max-w-md shadow-lg">
-        <h3 className="text-2xl text-center font-semibold mb-4 text-gray-800">
-          Post a New Job
-        </h3>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            type="text"
-            name="title"
-            placeholder="Job Title"
-            value={formData.title}
-            onChange={handleChange}
-            required
-            className="w-full px-4 py-2 border rounded-md"
-          />
-          <input
-            type="date"
-            name="date"
-            value={formData.date}
-            onChange={handleChange}
-            required
-            className="w-full px-4 py-2 border rounded-md"
-          />
-          <input
-            type="text"
-            name="location"
-            placeholder="Location"
-            value={formData.location}
-            onChange={handleChange}
-            required
-            className="w-full px-4 py-2 border rounded-md"
-          />
-          <input
-            type="number"
-            name="applicants"
-            placeholder="Applicants"
-            value={formData.applicants}
-            onChange={handleChange}
-            required
-            className="w-full px-4 py-2 border rounded-md"
-          />
-          <div className="flex justify-center space-x-4 pt-2">
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50">
+      <div className="bg-white p-6 rounded-xl w-full max-w-md shadow-lg">
+        <h2 className="text-2xl font-semibold mb-4 text-center">Edit Job</h2>
+
+        <form onSubmit={handleSubmit} className="space-y-3">
+          {["title", "company", "location"].map((field) => (
+            <div key={field}>
+              <label className="block font-medium capitalize">{field}</label>
+              <input
+                type="text"
+                name={field}
+                value={formData[field]}
+                onChange={handleChange}
+                className="w-full border rounded-lg p-2"
+              />
+            </div>
+          ))}
+
+          <div>
+            <label className="block font-medium">Date Posted</label>
+            <input
+              type="date"
+              name="datePosted"
+              value={formData.datePosted}
+              onChange={handleChange}
+              className="w-full border rounded-lg p-2"
+            />
+          </div>
+
+          <div className="flex justify-end space-x-3 mt-4">
             <button
               type="button"
-              onClick={() => setIsModalOpen(false)}
-              className="px-4 py-2 bg-gray-300 cursor-pointer rounded-full hover:bg-gray-400 transition"
+              onClick={onClose}
+              className="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-4 py-2 bg-green-700 text-white cursor-pointer rounded-full hover:bg-green-800 transition"
+              className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
             >
-              Post
+              Update
             </button>
           </div>
         </form>

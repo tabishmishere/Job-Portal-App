@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { createJob } from "../api/JobApi.jsx";
+import axios from "axios";
 
 const AddJob = () => {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
     location: "",
-    jobType: "Full-Time",
+    jobType: "Full-time",
     salaryRange: "",
     category: "Programming",
-    recruiterId: "12345",
+    recruiterId: "672999999999999999999999", // replace later with actual recruiter ID
     company: { name: "", logo: "", website: "" },
   });
 
@@ -20,7 +20,6 @@ const AddJob = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    // handle nested company fields separately
     if (name.startsWith("company.")) {
       const companyField = name.split(".")[1];
       setFormData({
@@ -32,31 +31,33 @@ const AddJob = () => {
     }
   };
 
-  // Handle form submit
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setMessage("");
 
     try {
-      const res = await createJob(formData);
-      setMessage("Job created successfully!");
-      console.log("Job created:", res);
+      // Direct axios call instead of createJob()
+      const res = await axios.post("http://localhost:5000/api/jobs", formData);
 
-      // reset form
+      setMessage("Job created successfully!");
+      console.log("Job created:", res.data);
+
+      // Reset form
       setFormData({
         title: "",
         description: "",
         location: "",
-        jobType: "Full-Time",
+        jobType: "Full-time",
         salaryRange: "",
         category: "Programming",
-        recruiterId: "12345",
+        recruiterId: "672999999999999999999999",
         company: { name: "", logo: "", website: "" },
       });
     } catch (error) {
-      setMessage("Error creating job. Please try again.");
-      console.error(error);
+      setMessage("❌ Error creating job. Please try again.");
+      console.error("Error:", error);
     } finally {
       setLoading(false);
     }
@@ -134,10 +135,10 @@ const AddJob = () => {
               onChange={handleChange}
               className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
             >
-              <option>Full-Time</option>
-              <option>Part-Time</option>
+              <option>Full-time</option>
+              <option>Part-time</option>
               <option>Remote</option>
-              <option>Contract</option>
+              <option>Intern</option>
             </select>
           </div>
 
@@ -201,7 +202,7 @@ const AddJob = () => {
           </div>
         </form>
 
-        {/* Success/Error Message */}
+        {/* Message */}
         {message && (
           <p className="mt-4 text-center text-sm font-medium text-gray-700">
             {message}
