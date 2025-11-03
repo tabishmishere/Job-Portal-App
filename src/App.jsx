@@ -4,65 +4,81 @@ import Navbar from "./components/Navbar.jsx";
 import Header from "./components/Header.jsx";
 import Login from "./pages/Login";
 import Signup from "./pages/SignUp";
-import Dashboard from "./admin/RecruiterDashboard.jsx";
-import JobManagement from "./admin/JobManagement";
-import UserManagement from "./admin/UserManagement";
-import AddJob from "./admin/AddJob";
-import ApplicationOverview from "./admin/ApplicationOverview";
 import Footer from "./components/Footer";
 import Testimonial from "./components/Testimonial";
-import Profile from "./admin/Profile";
-import Jobs from "./user/Jobs"
+import Jobs from "./user/Jobs";
 import AdminDashboard from "./admin/AdminDashboard.jsx";
 import UserDashboard from "./admin/UserDashboard.jsx";
 import UserSettings from "./admin/ProfileSetting.jsx";
 
+// Recruiter Pages
+import RecruiterLayout from "./layout/RecruiterLayout.jsx";
+import RecruiterDashboard from "./admin/RecruiterDashboard.jsx";
+import Profile from "./admin/Profile";
+import AddJob from "./admin/AddJob";
+import JobManagement from "./admin/JobManagement.jsx";
+import JobApplicants from "./admin/JobApplicants.jsx";
+
 const AppContent = () => {
   const location = useLocation();
 
-  // Only show testimonial & footer on the landing page ("/")
-  const showLandingExtras = location.pathname === "/";
-  const hideNavbarRoutes = ["/admin/dashboard", "/recruiter/dashboard", "/user/jobs", "/user/dashboard", "/user/profilesetting"];
+  // Hide navbar on these routes
+  const hideNavbarRoutes = [
+    "/admin/dashboard",
+    "/recruiter/dashboard",
+    "/user/jobs",
+    "/user/dashboard",
+    "/user/profilesetting",
+  ];
   const shouldHideNavbar = hideNavbarRoutes.includes(location.pathname);
+
+  // Show footer/testimonial only on home page
+  const showLandingExtras = location.pathname === "/";
 
   return (
     <>
-       {!shouldHideNavbar && <Navbar />}
+      {!shouldHideNavbar && <Navbar />}
+
       <Routes>
+        {/* Public Routes */}
         <Route path="/" element={<Header />} />
         <Route path="/features" element={<div>Features</div>} />
         <Route path="/about" element={<div>About</div>} />
-        <Route path="/recruiter/dashboard" element={<Dashboard />} />
-        <Route path="/admin/dashboard" element={<AdminDashboard/>} />
         <Route path="/sign-up" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/admin/job-management" element={<JobManagement />} />
-        <Route path="/admin/user-management" element={<UserManagement />} />
-        <Route path="/admin/all-applicants" element={<ApplicationOverview />} />
-        <Route path="/admin/add-job" element={<AddJob />} />
-        <Route path="/admin/profile" element={<Profile />} />
         <Route path="/user/jobs" element={<Jobs />} />
+
+        {/* User Routes */}
         <Route path="/user/dashboard" element={<UserDashboard />} />
         <Route path="/user/profilesetting" element={<UserSettings />} />
 
+        {/* Admin Routes */}
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+
+        {/* Recruiter Layout with Nested Routes */}
+        <Route path="/recruiter" element={<RecruiterLayout />}>
+          <Route path="dashboard" element={<RecruiterDashboard />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="add-job" element={<AddJob />} />
+          <Route path="job-management" element={<JobManagement />} />
+          <Route path="job-applicants" element={<JobApplicants />} />
+        </Route>
       </Routes>
 
       {showLandingExtras && (
         <>
           <Testimonial />
-          <Footer />  
+          <Footer />
         </>
       )}
     </>
   );
 };
 
-const App = () => {
-  return (
-    <Router>
-      <AppContent />
-    </Router>
-  );
-};
+const App = () => (
+  <Router>
+    <AppContent />
+  </Router>
+);
 
 export default App;

@@ -3,6 +3,7 @@ import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import JobForm from "../components/Admin/JobForm";
 import { getAllJobs, deleteJob } from "../api/JobApi.jsx";
+import axios from "axios";
 
 const JobManagement = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -27,15 +28,26 @@ const JobManagement = () => {
     setIsModalOpen(true);
   };
 
-  const handleJobUpdated = (updatedJob) => {
-    setPostedJobs((prevJobs) =>
-      prevJobs.map((job) => (job._id === updatedJob._id ? updatedJob : job))
-    );
+  const handleUpdateJob = async (jobId, formData) => {
+    try {
+      const res = await axios.put(
+        `http://localhost:5000/api/jobs/${jobId}`,
+        formData,
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      console.log(res.data.message); // "Job updated successfully."
+    } catch (error) {
+      console.error("Error updating job:", error);
+    }
   };
 
   // Delete job handler.
   const handleDelete = async (jobId) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this job?");
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this job?"
+    );
     if (!confirmDelete) return;
 
     try {
@@ -100,7 +112,7 @@ const JobManagement = () => {
                   </td>
                   <td className="py-4 px-6">
                     <div className="flex space-x-4">
-                    {/* Delete button */}
+                      {/* Delete button */}
                       <button
                         className="text-gray-600 hover:text-red-600 transition-all"
                         onClick={() => handleDelete(job._id || job.id)}
@@ -182,7 +194,7 @@ const JobManagement = () => {
         <JobForm
           job={selectedJob}
           onClose={() => setIsModalOpen(false)}
-          onJobUpdated={handleJobUpdated}
+          onJobUpdated={handleUpdateJob}
         />
       )}
     </div>

@@ -9,18 +9,18 @@ const RecruiterSidebar = () => {
   const location = useLocation();
 
   const menuItems = [
-    { name: "Dashboard", icon: <FaUser className="font-bold text-2xl" />, path: "/dashboard" },
-    { name: "My Profile", icon: <IoPersonSharp className="font-bold text-2xl" />, path: "/dashboard/profile" },
-    { name: "Add Job", icon: <FaCirclePlus className="font-bold text-2xl" />, path: "/dashboard/add-job" },
+    { name: "Dashboard", icon: <FaUser className="font-bold text-2xl" />, path: "/recruiter/dashboard" },
+    { name: "My Profile", icon: <IoPersonSharp className="font-bold text-2xl" />, path: "/recruiter/profile" },
+    { name: "Add Job", icon: <FaCirclePlus className="font-bold text-2xl" />, path: "/recruiter/add-job" },
     {
       name: "Manage Jobs",
       icon: <FaBriefcase className="font-bold text-2xl" />,
-      path: "/dashboard/job-management",
+      path: "/recruiter/job-management",
     },
     {
       name: "Applicants",
       icon: <PiPersonSimpleRunBold className="font-bold text-2xl" />,
-      path: "/dashboard/applicants",
+      path: "/recruiter/job-applicants",
     },
   ];
 
