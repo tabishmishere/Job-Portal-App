@@ -13,7 +13,7 @@ const Login = () => {
 
   const handleLogin = async (e) => {
   e.preventDefault();
-  console.log("Login button clicked ✅");
+  console.log("Login button clicked ");
 
   try {
     const res = await axios.post("http://127.0.0.1:5000/api/login", {
@@ -29,7 +29,7 @@ const Login = () => {
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
 
-      // ✅ Navigate based on user role
+      // Navigate based on user role
       if (user.role === "admin") {
         navigate("/admin/dashboard");
       } else if (user.role === "recruiter") {
