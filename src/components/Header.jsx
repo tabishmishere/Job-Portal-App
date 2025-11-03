@@ -14,7 +14,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="selection:bg-green-500 selection:text-white bg-gradient-to-r from-green-100 to-white py-16 px-6 min-h-screen flex items-center justify-center">
+      <header id="hometop" className="selection:bg-green-500 selection:text-white bg-linear-to-r from-green-100 to-white py-16 px-6 min-h-screen flex items-center justify-center">
         <div className="max-w-4xl mx-auto flex flex-col items-center justify-center text-center">
           <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-black leading-tight mb-6">
             Find & Hire <br />
