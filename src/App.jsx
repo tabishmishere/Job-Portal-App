@@ -1,70 +1,56 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useLocation,
-} from "react-router-dom";
-
-// Components
-import Navbar from "./components/Navbar";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import Testimonial from "./components/Testimonial";
-
-// Recruiter Pages
-import Dashboard from "./admin/RecruiterDashboard";
-import JobManagement from "./admin/JobManagement";
-import AddJob from "./admin/AddJob";
-import JobApplicants from "./admin/JobApplicants";
-import Profile from "./admin/Profile";
-import RecruiterLayout from "./layout/RecruiterLayout";
-
-// User Pages
-import Jobs from "./user/Jobs";
-
-// Auth Pages
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import Navbar from "./components/Navbar.jsx";
+import Header from "./components/Header.jsx";
 import Login from "./pages/Login";
 import Signup from "./pages/SignUp";
+import Dashboard from "./admin/RecruiterDashboard.jsx";
+import JobManagement from "./admin/JobManagement";
+import UserManagement from "./admin/UserManagement";
+import AddJob from "./admin/AddJob";
+import ApplicationOverview from "./admin/ApplicationOverview";
+import Footer from "./components/Footer";
+import Testimonial from "./components/Testimonial";
+import Profile from "./admin/Profile";
+import Jobs from "./user/Jobs"
+import AdminDashboard from "./admin/AdminDashboard.jsx";
+import UserDashboard from "./admin/UserDashboard.jsx";
+import UserSettings from "./admin/ProfileSetting.jsx";
 
 const AppContent = () => {
   const location = useLocation();
 
-  // Hide Navbar on Dashboard routes
-  const isDashboardRoute = location.pathname.startsWith("/dashboard");
+  // Only show testimonial & footer on the landing page ("/")
   const showLandingExtras = location.pathname === "/";
+  const hideNavbarRoutes = ["/admin/dashboard", "/recruiter/dashboard", "/user/jobs", "/user/dashboard", "/user/profilesetting"];
+  const shouldHideNavbar = hideNavbarRoutes.includes(location.pathname);
 
   return (
     <>
-      {!isDashboardRoute && <Navbar />}
-
+       {!shouldHideNavbar && <Navbar />}
       <Routes>
-        {/* Public Routes */}
         <Route path="/" element={<Header />} />
+        <Route path="/features" element={<div>Features</div>} />
+        <Route path="/about" element={<div>About</div>} />
+        <Route path="/recruiter/dashboard" element={<Dashboard />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard/>} />
         <Route path="/sign-up" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-
-        {/* Recruiter (Dashboard) Routes */}
-        <Route path="/dashboard" element={<RecruiterLayout />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/dashboard/job-management" element={<JobManagement />} />
-          <Route
-            path="/dashboard/applicants"
-            element={<JobApplicants />}
-          />
-          <Route path="/dashboard/add-job" element={<AddJob />} />
-          <Route path="/dashboard/profile" element={<Profile />} />
-        </Route>
-
-        {/* User Routes */}
+        <Route path="/admin/job-management" element={<JobManagement />} />
+        <Route path="/admin/user-management" element={<UserManagement />} />
+        <Route path="/admin/all-applicants" element={<ApplicationOverview />} />
+        <Route path="/admin/add-job" element={<AddJob />} />
+        <Route path="/admin/profile" element={<Profile />} />
         <Route path="/user/jobs" element={<Jobs />} />
+        <Route path="/user/dashboard" element={<UserDashboard />} />
+        <Route path="/user/profilesetting" element={<UserSettings />} />
+
       </Routes>
 
-      {/* Only show testimonial & footer on landing page */}
       {showLandingExtras && (
         <>
           <Testimonial />
-          <Footer />
+          <Footer />  
         </>
       )}
     </>
