@@ -35,7 +35,7 @@ const JobManagement = () => {
 
   // Delete job handler.
   const handleDelete = async (jobId) => {
-    const confirmDelete = alert("Are you sure you want to delete this job?");
+    const confirmDelete = window.confirm("Are you sure you want to delete this job?");
     if (!confirmDelete) return;
 
     try {
