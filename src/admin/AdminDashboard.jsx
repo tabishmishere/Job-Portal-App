@@ -39,12 +39,12 @@ const AdminDashboard = () => {
   return (
     <div className="flex min-h-screen">
       {/* Sidebar */}
-      <div className="hidden md:block rounded-xl mt-10 min-h-screen p-6">
+      <div className="hidden md:block rounded-xl min-h-screen p-6">
         <Sidebar />
       </div>
 
       {/* Main Dashboard */}
-      <div className="flex-1 p-8 bg-[rgba(211,239,224,0.3)] rounded-xl shadow-lg mt-10 min-h-screen">
+      <div className="flex-1 p-8 bg-[rgba(211,239,224,0.3)] rounded-xl shadow-lg min-h-screen">
         {/* Header */}
         <div className="flex justify-between items-center mb-10">
           <h2 className="text-4xl font-bold text-green-900">Admin Dashboard</h2>
@@ -182,14 +182,14 @@ const AdminDashboard = () => {
         </div>
 
         {/* Analytics Section */}
-        <div className="bg-white p-6 mt-10 rounded-2xl shadow-md hover:shadow-lg transition-all">
+        {/* <div className="bg-white p-6 mt-10 rounded-2xl shadow-md hover:shadow-lg transition-all">
           <h3 className="text-xl font-semibold text-gray-800 mb-4">
             Analytics Overview
           </h3>
           <div className="h-44 bg-gray-100 rounded-lg flex justify-center items-center text-gray-500">
             <p>Analytics Graph Coming Soon...</p>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
