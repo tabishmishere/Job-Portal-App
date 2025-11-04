@@ -87,9 +87,6 @@ const JobApplicants = () => {
                   Location
                 </th>
                 <th className="py-4 px-6 text-left font-medium text-gray-900">
-                  No of Jobs
-                </th>
-                <th className="py-4 px-6 text-left font-medium text-gray-900">
                   Resume
                 </th>
                 <th className="py-4 px-6 text-left font-medium text-gray-900">
@@ -108,9 +105,6 @@ const JobApplicants = () => {
                     <td className="py-4 px-6 text-gray-800">{job.userName}</td>
                     <td className="py-4 px-6 text-gray-800">{job.title}</td>
                     <td className="py-4 px-6 text-gray-600">{job.location}</td>
-                    <td className="py-4 px-6 text-gray-600">
-                      {job.applicants}
-                    </td>
                      <td className="py-4 px-6">
                       {job.resume ? (
                         <a
@@ -191,7 +185,6 @@ const JobApplicants = () => {
                     <a
                       href={job.resume}
                       target="_blank"
-                      rel="noopener noreferrer"
                       className="text-green-600 hover:underline"
                     >
                       View Resume
