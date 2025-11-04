@@ -3,7 +3,7 @@ import { IoPersonOutline } from "react-icons/io5";
 import { GoBookmark } from "react-icons/go";
 import { FaEye } from "react-icons/fa";
 import { HiOutlinePencilAlt } from "react-icons/hi";
-import { MdOutlineWorkOutline, MdDeleteOutline } from "react-icons/md";
+import { MdDeleteOutline } from "react-icons/md";
 import { FaUsersCog } from "react-icons/fa";
 import { BsBriefcase } from "react-icons/bs";
 import Sidebar from "./AdminSidebar";
@@ -39,26 +39,24 @@ const AdminDashboard = () => {
   return (
     <div className="flex min-h-screen">
       {/* Sidebar */}
-      <div className="min-h-screen p-6 hidden md:block rounded-xl mt-10">
+      <div className="hidden md:block rounded-xl mt-10 min-h-screen p-6">
         <Sidebar />
       </div>
 
-      {/* Main Content */}
+      {/* Main Dashboard */}
       <div className="flex-1 p-8 bg-[rgba(211,239,224,0.3)] rounded-xl shadow-lg mt-10 min-h-screen">
         {/* Header */}
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex justify-between items-center mb-10">
           <h2 className="text-4xl font-bold text-green-900">Admin Dashboard</h2>
-          <div className="flex space-x-4 items-center">
-            <button className="bg-green-900 hover:bg-white hover:text-green-900 transition-all duration-300 cursor-pointer text-white font-semibold py-2 px-4 rounded-full shadow-sm">
-              Add Admin
-            </button>
-          </div>
+          <button className= "bg-green-900 cursor-pointer hover:bg-white hover:text-green-900 transition-all duration-300 text-white font-semibold py-2 px-6 rounded-full shadow-md">
+            Add Admin
+          </button>
         </div>
 
-        {/* Stats Section */}
-        <div className="grid grid-cols-4 gap-6 mb-8">
-          <div className="bg-white p-7 rounded-xl shadow-md flex items-center justify-around">
-            <div className="flex flex-col">
+        {/* Dashboard Stats */}
+        <div className="grid grid-cols-4 gap-6 mb-10">
+          <div className="bg-white p-7 rounded-xl shadow-md flex items-center justify-between hover:shadow-lg transition-all">
+            <div>
               <h4 className="text-3xl font-bold text-gray-700">125</h4>
               <p className="text-sm text-gray-500">Total Users</p>
             </div>
@@ -67,8 +65,8 @@ const AdminDashboard = () => {
             </div>
           </div>
 
-          <div className="bg-white p-7 rounded-xl shadow-md flex items-center justify-around">
-            <div className="flex flex-col">
+          <div className="bg-white p-7 rounded-xl shadow-md flex items-center justify-between hover:shadow-lg transition-all">
+            <div>
               <h4 className="text-3xl font-bold text-gray-700">32</h4>
               <p className="text-sm text-gray-500">Recruiters</p>
             </div>
@@ -77,8 +75,8 @@ const AdminDashboard = () => {
             </div>
           </div>
 
-          <div className="bg-white p-7 rounded-xl shadow-md flex items-center justify-around">
-            <div className="flex flex-col">
+          <div className="bg-white p-7 rounded-xl shadow-md flex items-center justify-between hover:shadow-lg transition-all">
+            <div>
               <h4 className="text-3xl font-bold text-gray-700">45</h4>
               <p className="text-sm text-gray-500">Job Posts</p>
             </div>
@@ -87,8 +85,8 @@ const AdminDashboard = () => {
             </div>
           </div>
 
-          <div className="bg-white p-7 rounded-xl shadow-md flex items-center justify-around">
-            <div className="flex flex-col">
+          <div className="bg-white p-7 rounded-xl shadow-md flex items-center justify-between hover:shadow-lg transition-all">
+            <div>
               <h4 className="text-3xl font-bold text-gray-700">1.2k</h4>
               <p className="text-sm text-gray-500">Applications</p>
             </div>
@@ -99,12 +97,14 @@ const AdminDashboard = () => {
         </div>
 
         {/* Management Sections */}
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-2 gap-8">
           {/* Manage Jobs */}
-          <div className="bg-white p-6 rounded-xl shadow-md">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-semibold text-gray-800">Manage Jobs</h3>
-              <button className="bg-green-900 text-white py-1 px-3 rounded-lg hover:bg-green-700 text-sm">
+          <div className="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition-all">
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-xl font-semibold text-gray-800">
+                Manage Jobs
+              </h3>
+              <button className="text-sm bg-green-900 text-white py-1 px-4 rounded-full hover:bg-green-700 transition-all">
                 View All
               </button>
             </div>
@@ -113,23 +113,22 @@ const AdminDashboard = () => {
               {jobs.map((job) => (
                 <li
                   key={job.id}
-                  className="flex items-center justify-between border-b pb-3"
+                  className="flex items-center justify-between border-b pb-3 hover:bg-gray-50 transition-all rounded-lg px-2"
                 >
                   <div className="flex items-center space-x-3">
                     <img
                       src={job.logo}
                       alt={job.title}
-                      className="w-10 h-10 rounded-full object-contain"
+                      className="w-10 h-10 rounded-full object-cover"
                     />
-                    <div className="flex flex-col">
-                      <span className="text-sm font-semibold text-gray-900">
+                    <div>
+                      <p className="font-semibold text-gray-900 text-sm">
                         {job.title}
-                      </span>
-                      <span className="text-xs text-gray-500">{job.company}</span>
+                      </p>
+                      <p className="text-xs text-gray-500">{job.company}</p>
                     </div>
                   </div>
-
-                  <div className="flex space-x-3 text-gray-600">
+                  <div className="flex space-x-3 text-gray-500">
                     <HiOutlinePencilAlt className="cursor-pointer hover:text-green-700" />
                     <MdDeleteOutline
                       className="cursor-pointer hover:text-red-600"
@@ -142,10 +141,12 @@ const AdminDashboard = () => {
           </div>
 
           {/* Manage Users */}
-          <div className="bg-white p-6 rounded-xl shadow-md">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-semibold text-gray-800">Manage Users</h3>
-              <button className="bg-green-900 text-white py-1 px-3 rounded-lg hover:bg-green-700 text-sm">
+          <div className="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition-all">
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-xl font-semibold text-gray-800">
+                Manage Users
+              </h3>
+              <button className="text-sm bg-green-900 text-white py-1 px-4 rounded-full hover:bg-green-700 transition-all">
                 View All
               </button>
             </div>
@@ -154,21 +155,20 @@ const AdminDashboard = () => {
               {users.map((user) => (
                 <li
                   key={user.id}
-                  className="flex items-center justify-between border-b pb-3"
+                  className="flex items-center justify-between border-b pb-3 hover:bg-gray-50 transition-all rounded-lg px-2"
                 >
                   <div className="flex items-center space-x-3">
                     <div className="bg-green-100 text-green-800 font-bold rounded-full w-10 h-10 flex items-center justify-center">
                       {user.name.charAt(0)}
                     </div>
-                    <div className="flex flex-col">
-                      <span className="text-sm font-semibold text-gray-900">
+                    <div>
+                      <p className="font-semibold text-gray-900 text-sm">
                         {user.name}
-                      </span>
-                      <span className="text-xs text-gray-500">{user.role}</span>
+                      </p>
+                      <p className="text-xs text-gray-500">{user.role}</p>
                     </div>
                   </div>
-
-                  <div className="flex space-x-3 text-gray-600">
+                  <div className="flex space-x-3 text-gray-500">
                     <HiOutlinePencilAlt className="cursor-pointer hover:text-green-700" />
                     <MdDeleteOutline
                       className="cursor-pointer hover:text-red-600"
@@ -181,12 +181,12 @@ const AdminDashboard = () => {
           </div>
         </div>
 
-        {/* Placeholder for Analytics */}
-        <div className="bg-white p-6 mt-8 rounded-xl shadow-md">
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">
+        {/* Analytics Section */}
+        <div className="bg-white p-6 mt-10 rounded-2xl shadow-md hover:shadow-lg transition-all">
+          <h3 className="text-xl font-semibold text-gray-800 mb-4">
             Analytics Overview
           </h3>
-          <div className="h-40 bg-gray-100 rounded-lg flex justify-center items-center text-gray-500">
+          <div className="h-44 bg-gray-100 rounded-lg flex justify-center items-center text-gray-500">
             <p>Analytics Graph Coming Soon...</p>
           </div>
         </div>
