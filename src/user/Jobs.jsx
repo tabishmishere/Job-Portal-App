@@ -69,6 +69,18 @@ const Jobs = () => {
     },
   ];
 
+  const [searchJob, setSearchJob] = useState("");
+  const [searchLocation, setSearchLocaition] = useState("");
+
+  const filteredJobs = jobs.filter((job) => {
+    const title = job.title
+      .toLowerCase()
+      .includes(searchJob.toLowerCase());
+    const location = job.location
+      .toLowerCase()
+      .includes(searchLocation.toLowerCase());
+    return title && location;
+  });
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Top Navigation Bar */}
@@ -142,6 +154,8 @@ const Jobs = () => {
               <input
                 type="text"
                 placeholder="Search jobs..."
+                value={searchJob}
+                onChange={(e) => setSearchJob(e.target.value)}
                 className="border border-gray-300 rounded-lg p-3 pl-10 w-full focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-150"
               />
             </div>
@@ -151,6 +165,8 @@ const Jobs = () => {
               <input
                 type="text"
                 placeholder="e.g. Location"
+                value={searchLocation}
+                onChange={(e) => setSearchLocaition(e.target.value)}
                 className="border border-gray-300 rounded-lg p-3 pl-10 w-full focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-150"
               />
             </div>
@@ -219,7 +235,7 @@ const Jobs = () => {
             </h2>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {jobs.map((job) => (
+              {filteredJobs.map((job) => (
                 <div
                   key={job.id}
                   className="bg-white shadow-sm rounded-xl p-5 hover:shadow-md transition"

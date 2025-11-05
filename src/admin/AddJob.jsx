@@ -9,7 +9,7 @@ const AddJob = () => {
     jobType: "Full-time",
     salaryRange: "",
     category: "Programming",
-    recruiterId: "672999999999999999999999", // replace later with actual recruiter ID
+    recruiterId: "12345", // replace later with actual recruiter ID
     company: { name: "", logo: "", website: "" },
   });
 
@@ -38,7 +38,6 @@ const AddJob = () => {
     setMessage("");
 
     try {
-      // Direct axios call instead of createJob()
       const res = await axios.post("http://localhost:5000/api/jobs", formData);
 
       setMessage("Job created successfully!");
@@ -56,7 +55,7 @@ const AddJob = () => {
         company: { name: "", logo: "", website: "" },
       });
     } catch (error) {
-      setMessage("❌ Error creating job. Please try again.");
+      setMessage("Error creating job. Please try again.");
       console.error("Error:", error);
     } finally {
       setLoading(false);
