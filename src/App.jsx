@@ -13,7 +13,6 @@ import Signup from "./pages/SignUp";
 
 import Dashboard from "./admin/RecruiterDashboard";
 import JobManagement from "./admin/JobManagement";
-import UserManagement from "./admin/UserManagement";
 import AddJob from "./admin/AddJob";
 import ApplicationOverview from "./admin/ApplicationOverview";
 import Profile from "./admin/Profile";
@@ -60,7 +59,7 @@ const AppContent = () => {
        <Route path="/recruiter" element={<RecruiterLayout />}>
   <Route path="dashboard" element={<Dashboard />} />
   <Route path="job-management" element={<JobManagement />} />
-  <Route path="applicants" element={<RecruiterApplicants />} />  {/* ✅ FIXED */}
+  <Route path="applicants" element={<RecruiterApplicants />} />
   <Route path="add-job" element={<AddJob />} />
   <Route path="edit-job/:id" element={<AddJob />} />
   <Route path="profile" element={<Profile />} />
@@ -69,7 +68,6 @@ const AppContent = () => {
 
         {/* Admin Routes */}
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
-        <Route path="/admin/user-management" element={<UserManagement />} />
 
         {/* User Routes */}
         <Route path="/user/jobs" element={<Jobs />} />

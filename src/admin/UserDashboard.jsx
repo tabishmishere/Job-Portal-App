@@ -1,77 +1,82 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { FiBriefcase, FiUser, FiLogOut } from "react-icons/fi";
 
 const UserDashboard = () => {
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
 
   if (!user) {
-    navigate("/login"); // Redirect if not logged in
+    navigate("/login");
+    return null;
   }
 
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50 p-6 md:p-12">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12 px-6 md:px-12">
       {/* Page Header */}
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-4xl font-extrabold text-gray-900">User Dashboard</h1>
-      </div>
+      <header className="flex justify-between items-center mb-10">
+        <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight">
+          Dashboard <span className="text-green-600">.</span>
+        </h1>
+      </header>
 
       {/* User Info Card */}
-      <div className="bg-white p-6 rounded-xl shadow-md mb-8 flex items-center space-x-6">
-        <img src={
-                  user.profile?.avatar
-                  ? `http://localhost:5000${user.profile.avatar}`
-                  : "/default-avatar.png"
-              }
-                  alt="Profile"
-                  className="w-10 h-10 rounded-full cursor-pointer"
-                  onClick={() => setDropdownOpen(!dropdownOpen)}
-            />
-        <div>
+      <div className="max-w-4xl mx-auto bg-white/80 backdrop-blur-md border border-gray-200 rounded-2xl shadow-md p-8 flex flex-col md:flex-row items-center md:items-start md:space-x-6 space-y-4 md:space-y-0">
+        <img
+          src={
+            user.profile?.avatar
+              ? `http://localhost:5000${user.profile.avatar}`
+              : "/default-avatar.png"
+          }
+          alt="Profile"
+          className="w-24 h-24 rounded-full border-4 border-green-500 shadow-md object-cover"
+        />
+        <div className="text-center md:text-left">
           <h2 className="text-2xl font-bold text-gray-800">{user.name}</h2>
           <p className="text-gray-500">{user.email}</p>
-          <p className="text-gray-500 capitalize">{user.role}</p>
+          <span className="inline-block mt-2 px-3 py-1 text-sm rounded-full bg-green-100 text-green-700 font-medium capitalize">
+            {user.role}
+          </span>
         </div>
       </div>
 
-      {/* Dashboard Sections */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {/* Dashboard Options */}
+      <div className="max-w-4xl mx-auto mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {/* Applied Jobs */}
         <div
-          className="bg-white p-6 rounded-xl shadow-md cursor-pointer hover:shadow-lg transition duration-200"
           onClick={() => navigate("/user/applied-jobs")}
+          className="bg-white/90 border border-gray-200 rounded-2xl p-6 flex flex-col items-center text-center hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer"
         >
-          <h3 className="text-xl font-semibold mb-2">Applied Jobs</h3>
-          <p className="text-gray-500">View all the jobs you applied for</p>
+          <FiBriefcase className="text-green-600 text-3xl mb-3" />
+          <h3 className="text-lg font-semibold text-gray-800 mb-1">Applied Jobs</h3>
+          <p className="text-gray-500 text-sm">View all the jobs you applied for</p>
         </div>
 
         {/* Profile Settings */}
         <div
-          className="bg-white p-6 rounded-xl shadow-md cursor-pointer hover:shadow-lg transition duration-200"
           onClick={() => navigate("/user/profilesetting")}
+          className="bg-white/90 border border-gray-200 rounded-2xl p-6 flex flex-col items-center text-center hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer"
         >
-          <h3 className="text-xl font-semibold mb-2">Profile Settings</h3>
-          <p className="text-gray-500">Update your profile and personal info</p>
+          <FiUser className="text-green-600 text-3xl mb-3" />
+          <h3 className="text-lg font-semibold text-gray-800 mb-1">Profile Settings</h3>
+          <p className="text-gray-500 text-sm">Update your personal and professional info</p>
         </div>
 
-        {/* Account Actions */}
+        {/* Logout */}
         <div
-          className="bg-white p-6 rounded-xl shadow-md cursor-pointer hover:shadow-lg transition duration-200"
-          onClick={() => {
-            localStorage.removeItem("user");
-            localStorage.removeItem("token");
-            navigate("/login");
-          }}
+          onClick={handleLogout}
+          className="bg-red-50 border border-red-200 rounded-2xl p-6 flex flex-col items-center text-center hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer"
         >
-          <h3 className="text-xl font-semibold mb-2 text-red-600">Logout</h3>
-          <p className="text-gray-500">Sign out from your account</p>
+          <FiLogOut className="text-red-500 text-3xl mb-3" />
+          <h3 className="text-lg font-semibold text-red-600 mb-1">Logout</h3>
+          <p className="text-gray-500 text-sm">Sign out from your account</p>
         </div>
-      </div>
-
-      {/* Optional: Recent Activity / Stats */}
-      <div className="bg-white p-6 rounded-xl shadow-md mt-8">
-        <h3 className="text-2xl font-bold mb-4">Recent Activity</h3>
-        <p className="text-gray-500">You haven’t applied to any jobs yet.</p>
       </div>
     </div>
   );
