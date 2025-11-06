@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
-import JobForm from "../components/Admin/JobForm";
 
 const JobApplicants = () => {
   const [postedJobs, setPostedJobs] = useState([
@@ -17,7 +16,7 @@ const JobApplicants = () => {
     {
       id: 2,
       userName: "Arsal Majid",
-      title: "Mern Stack Developer",
+      title: "MERN Stack Developer",
       location: "Lahore",
       applicants: 18,
       status: "Rejected",
@@ -51,7 +50,6 @@ const JobApplicants = () => {
       resume: "https://example.com/resume1.pdf",
     },
   ]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleStatusChange = (id, status) => {
     setPostedJobs((prevJobs) =>
@@ -69,13 +67,13 @@ const JobApplicants = () => {
       </div>
 
       <div className="bg-white rounded-xl shadow-lg">
-        {/* Table View for larger screens */}
+        {/* Desktop Table */}
         <div className="hidden md:block overflow-x-auto">
           <table className="min-w-full table-auto text-sm">
             <thead>
               <tr>
                 <th className="py-4 px-6 text-left font-medium text-gray-900">
-                  Id
+                  ID
                 </th>
                 <th className="py-4 px-6 text-left font-medium text-gray-900">
                   User Name
@@ -95,6 +93,9 @@ const JobApplicants = () => {
                 <th className="py-4 px-6 text-left font-medium text-gray-900">
                   Status
                 </th>
+                <th className="py-4 px-6 text-left font-medium text-gray-900">
+                  Action
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -111,7 +112,7 @@ const JobApplicants = () => {
                     <td className="py-4 px-6 text-gray-600">
                       {job.applicants}
                     </td>
-                     <td className="py-4 px-6">
+                    <td className="py-4 px-6">
                       {job.resume ? (
                         <a
                           href={job.resume}
@@ -125,36 +126,34 @@ const JobApplicants = () => {
                         <span className="text-gray-500">No Resume</span>
                       )}
                     </td>
-                    <td className="py-4 px-6 text-gray-600">
+                    <td className="py-4 px-6">
                       <span
-                        className={
+                        className={`font-semibold ${
                           job.status === "Accepted"
                             ? "text-green-600"
                             : "text-red-600"
-                        }
+                        }`}
                       >
                         {job.status}
                       </span>
                     </td>
                     <td className="py-4 px-6">
-                      <div className="flex space-x-4">
-                        <select
-                          value={job.status}
-                          onChange={(e) =>
-                            handleStatusChange(job.id, e.target.value)
-                          }
-                          className="bg-white text-sm text-gray-700 border border-gray-300 rounded-md shadow-sm"
-                        >
-                          <option value="Accepted">Accept</option>
-                          <option value="Rejected">Reject</option>
-                        </select>
-                      </div>
+                      <select
+                        value={job.status}
+                        onChange={(e) =>
+                          handleStatusChange(job.id, e.target.value)
+                        }
+                        className="bg-white text-sm text-gray-700 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-300"
+                      >
+                        <option value="Accepted">Accept</option>
+                        <option value="Rejected">Reject</option>
+                      </select>
                     </td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan="7" className="text-center text-gray-500">
+                  <td colSpan="8" className="text-center py-6 text-gray-500">
                     No job applicants yet.
                   </td>
                 </tr>
@@ -172,10 +171,14 @@ const JobApplicants = () => {
                 className="bg-gray-50 rounded-lg p-4 shadow border border-gray-200"
               >
                 <div className="mb-2">
-                  <p className="text-sm text-gray-500">Job Title</p>
+                  <p className="text-sm text-gray-500">User Name</p>
                   <p className="text-base font-semibold text-gray-800">
                     {job.userName}
                   </p>
+                </div>
+                <div className="mb-2">
+                  <p className="text-sm text-gray-500">Job Title</p>
+                  <p className="text-base text-gray-700">{job.title}</p>
                 </div>
                 <div className="mb-2">
                   <p className="text-sm text-gray-500">Location</p>
@@ -203,11 +206,11 @@ const JobApplicants = () => {
                 <div className="mb-2">
                   <p className="text-sm text-gray-500">Status</p>
                   <span
-                    className={
+                    className={`font-semibold ${
                       job.status === "Accepted"
                         ? "text-green-600"
                         : "text-red-600"
-                    }
+                    }`}
                   >
                     {job.status}
                   </span>
