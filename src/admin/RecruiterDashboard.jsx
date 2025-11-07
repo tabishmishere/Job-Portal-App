@@ -47,6 +47,9 @@ const AdminDashboard = () => {
       logo: xevenLogo,
     },
   ]);
+
+   
+
   return (
     <div className="flex min-h-screen">
       {/* <div className="min-h-screen p-6 hidden md:block rounded-xl mt-10">
@@ -57,11 +60,6 @@ const AdminDashboard = () => {
         {/* Dashboard Header */}
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-4xl font-bold text-green-900">Recruiter Dashboard</h2>
-          <div className="flex space-x-4 items-center">
-            <button className="bg-green-900 hover:bg-white hover:text-green-900 translate-all duration-300 cursor-pointer text-white font-semibold py-2 px-4 rounded-full shadow-sm">
-              Post a Job
-            </button>
-          </div>
         </div>
         {/* Dashboard Stats */}
         <div className="grid grid-cols-4 gap-6 mb-8">
