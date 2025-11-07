@@ -11,10 +11,14 @@ const Signup = () => {
    const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const userData = { name, email, password };
+      const userData = {
+    name: name.trim(),
+    email: email.trim().toLowerCase(),
+    password: password.trim(),
+  };
 
     try {
-      const res = await fetch("http://localhost:5000/api/signup", {
+      const res = await fetch("http://localhost:5000/api/users/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -27,7 +31,7 @@ const Signup = () => {
       if (res.ok) {
         // alert("Signup successful!");
         console.log(data);
-        navigate("/user/jobs");
+        navigate("/login");
         
         // Optionally redirect to login
         // window.location.href = "/login";
