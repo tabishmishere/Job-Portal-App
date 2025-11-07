@@ -1,4 +1,3 @@
-// frontend/src/pages/Jobs.jsx
 import React, { useState, useEffect } from "react";
 import { FiMapPin } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
@@ -53,7 +52,6 @@ const Jobs = () => {
     "Content Writing",
   ];
 
-  // Fetch jobs from backend
   useEffect(() => {
     const fetchJobs = async () => {
       try {
@@ -69,20 +67,17 @@ const Jobs = () => {
     fetchJobs();
   }, []);
 
-  // Logout
   const handleLogout = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
     navigate("/login");
   };
 
-  // Apply modal open
   const handleApply = (job) => {
     setSelectedJob(job);
     setShowApplyModal(true);
   };
 
-  // Submit application
   const submitApplication = async () => {
     if (!cvFile) return alert("Please upload your CV!");
 
@@ -123,7 +118,6 @@ const Jobs = () => {
     }
   };
 
-  // Filter jobs based on search, location, job type, category
   useEffect(() => {
     let filtered = jobs;
 
@@ -152,7 +146,6 @@ const Jobs = () => {
     setFilteredJobs(filtered);
   }, [search, location, selectedTypes, selectedCategories, jobs]);
 
-  // Toggle filters
   const toggleType = (type) => {
     setSelectedTypes((prev) =>
       prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type]
@@ -166,11 +159,11 @@ const Jobs = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#f9fafb]">
       {/* Header */}
-      <header className="flex justify-between items-center p-4 bg-white shadow-sm border-b border-gray-100">
-        <p className="text-2xl font-extrabold text-black">
-          Jobi<span className="text-green-500">.</span>
+      <header className="flex justify-between items-center px-6 py-4 bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+        <p className="text-2xl font-extrabold text-gray-900">
+          Jobi<span className="text-green-600">.</span>
         </p>
 
         {user && (
@@ -218,53 +211,55 @@ const Jobs = () => {
       </header>
 
       {/* Main Content */}
-      <main className="p-4 md:p-12">
+      <main className="px-6 md:px-12 py-10">
         {/* Title */}
-        <div className="text-center mb-10 mt-8">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900">
-            Find your Dream Job Here!
+        <div className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">
+            Find your <span className="text-green-600">Dream Job</span> Here!
           </h1>
-          <p className="text-lg text-gray-500 mt-2">
+          <p className="text-gray-500 text-lg mt-3">
             Discover opportunities that match your passion
           </p>
         </div>
 
         {/* Search Bar */}
-        <div className="max-w-6xl mx-auto p-6 bg-white rounded-2xl shadow-sm border border-gray-200">
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-12 sm:gap-4">
-            <div className="relative col-span-1 sm:col-span-7">
+        <div className="max-w-6xl mx-auto bg-white shadow-md border border-gray-200 rounded-2xl px-6 py-5 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-12 gap-4">
+            <div className="relative sm:col-span-7">
               <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
               <input
                 type="text"
                 placeholder="Search jobs..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="border border-gray-300 rounded-lg p-3 pl-10 w-full focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
+                className="w-full border border-gray-300 rounded-xl py-3 pl-10 pr-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
               />
             </div>
-            <div className="relative col-span-1 sm:col-span-3">
+
+            <div className="relative sm:col-span-3">
               <FiMapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
               <input
                 type="text"
                 placeholder="e.g. Location"
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
-                className="border border-gray-300 rounded-lg p-3 pl-10 w-full focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
+                className="w-full border border-gray-300 rounded-xl py-3 pl-10 pr-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
               />
             </div>
-            <button className="col-span-1 sm:col-span-2 bg-green-600 text-white font-semibold py-3 px-8 rounded-lg hover:bg-green-700 transition w-full">
+
+            <button className="sm:col-span-2 bg-green-600 text-white font-semibold py-3 rounded-xl hover:bg-green-700 active:bg-green-800 transition shadow-md">
               Search Jobs
             </button>
           </div>
         </div>
 
-        {/* Filters & Jobs */}
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:space-x-8 mt-10">
+        {/* Filters + Jobs */}
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-10">
           {/* Filters */}
-          <aside className="md:h-fit bg-white p-6 rounded-xl shadow-sm mb-8 md:mb-0 border border-gray-200 md:sticky md:top-24">
+          <aside className="bg-white border border-gray-200 rounded-2xl shadow-sm p-10 md:w-1/4 h-fit md:sticky md:top-24 self-start">
             <h2 className="text-xl font-bold text-gray-800 mb-6">Filters</h2>
 
-            <div className="space-y-6">
+            <div className="space-y-8 overflow-y-auto max-h-[80vh] pr-2">
               {/* Job Type */}
               <div>
                 <h3 className="font-semibold text-gray-700 mb-3">Job Type</h3>
@@ -312,30 +307,34 @@ const Jobs = () => {
           </aside>
 
           {/* Job Listings */}
-          <section className="md:w-4/5">
+          <section className="flex-1">
             <h2 className="text-2xl font-bold text-gray-800 mb-6">
               Available Jobs ({filteredJobs.length})
             </h2>
 
             {loading ? (
-              <p className="text-center text-gray-500">Loading jobs...</p>
-            ) : filteredJobs.length === 0 ? (
-              <p className="text-center text-gray-500 bg-white p-8 rounded-xl border">
-                No jobs found matching your filters.
+              <p className="text-center text-gray-500 animate-pulse">
+                Loading jobs...
               </p>
+            ) : filteredJobs.length === 0 ? (
+              <div className="text-center bg-white py-10 rounded-2xl border border-gray-200 shadow-sm">
+                <p className="text-gray-600">
+                  No jobs found matching your filters.
+                </p>
+              </div>
             ) : (
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredJobs.map((job) => (
                   <div
                     key={job._id}
-                    className="bg-white border border-gray-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 rounded-2xl p-6 flex flex-col justify-between"
+                    className="bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 p-6 flex flex-col justify-between min-h-[320px]"
                   >
                     <div>
                       <div className="flex justify-between items-start mb-3">
                         <h3 className="text-lg font-bold text-gray-900 leading-snug">
                           {job.title}
                         </h3>
-                        <span className="inline-flex items-center text-xs px-3 py-1 rounded-full bg-green-100 text-green-700 font-medium whitespace-nowrap">
+                        <span className="text-xs px-4 whitespace-nowrap py-1.5 rounded-full bg-green-100 text-green-700 font-medium">
                           {job.jobType || "N/A"}
                         </span>
                       </div>
@@ -364,10 +363,10 @@ const Jobs = () => {
                     <button
                       onClick={() => handleApply(job)}
                       disabled={appliedJobs.includes(job._id)}
-                      className={`w-full py-2.5 mt-6 rounded-lg font-medium transition-colors ${
+                      className={`w-full py-2.5 mt-6 rounded-lg font-semibold transition-colors shadow-sm ${
                         appliedJobs.includes(job._id)
                           ? "bg-gray-400 text-white cursor-not-allowed"
-                          : "bg-green-600 text-white hover:bg-green-700"
+                          : "bg-green-600 text-white hover:bg-green-700 active:bg-green-800"
                       }`}
                     >
                       {appliedJobs.includes(job._id) ? "Applied" : "Apply Now"}
@@ -394,32 +393,32 @@ const Jobs = () => {
                 placeholder="Education"
                 value={education}
                 onChange={(e) => setEducation(e.target.value)}
-                className="w-full border rounded-lg p-2 focus:ring-2 focus:ring-green-500 focus:outline-none"
+                className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-green-500 focus:outline-none"
               />
               <input
                 type="text"
                 placeholder="Experience"
                 value={experience}
                 onChange={(e) => setExperience(e.target.value)}
-                className="w-full border rounded-lg p-2 focus:ring-2 focus:ring-green-500 focus:outline-none"
+                className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-green-500 focus:outline-none"
               />
               <input
                 type="text"
                 placeholder="Skills (comma separated)"
                 value={skills}
                 onChange={(e) => setSkills(e.target.value)}
-                className="w-full border rounded-lg p-2 focus:ring-2 focus:ring-green-500 focus:outline-none"
+                className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-green-500 focus:outline-none"
               />
               <textarea
                 placeholder="Cover Letter"
                 value={coverLetter}
                 onChange={(e) => setCoverLetter(e.target.value)}
-                className="w-full border rounded-lg p-2 h-24 focus:ring-2 focus:ring-green-500 focus:outline-none"
+                className="w-full border border-gray-300 rounded-lg p-2 h-24 focus:ring-2 focus:ring-green-500 focus:outline-none"
               />
               <input
                 type="file"
                 onChange={(e) => setCvFile(e.target.files[0])}
-                className="w-full border rounded-lg p-2"
+                className="w-full border border-gray-300 rounded-lg p-2"
               />
             </div>
 
