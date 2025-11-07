@@ -418,7 +418,7 @@ const Jobs = () => {
               <input
                 type="file"
                 onChange={(e) => setCvFile(e.target.files[0])}
-                className="w-full border border-gray-300 rounded-lg p-2"
+                className="text-gray-600 file:mr-4 file:cursor-pointer file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-100 file:text-green-700 hover:file:bg-green-200 transition"
               />
             </div>
 
