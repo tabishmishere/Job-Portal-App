@@ -38,7 +38,12 @@ const AddJob = () => {
     setMessage("");
 
     try {
-      const res = await axios.post("http://localhost:5000/api/jobs", formData);
+      const token = localStorage.getItem("token");
+      const res = await axios.post("http://localhost:5000/api/jobs", formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       setMessage("Job created successfully!");
       console.log("Job created:", res.data);
