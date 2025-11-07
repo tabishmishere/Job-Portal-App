@@ -6,13 +6,13 @@ import axios from "axios";
 const Login = () => {
   const navigate = useNavigate();
 
-  // Local state
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [unverifiedEmail, setUnverifiedEmail] = useState(""); // 👈 for resend link
 
-  // Redirect logged-in users automatically
+  // Redirect if already logged in
   useEffect(() => {
     const token = localStorage.getItem("token");
     const user = JSON.parse(localStorage.getItem("user"));
@@ -30,34 +30,44 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const res = await axios.post("http://127.0.0.1:5000/api/login", {
+      const res = await axios.post("http://127.0.0.1:5000/api/users/login", {
         email,
         password,
       });
 
       const { token, user } = res.data;
-      console.log("Login response:", res.data);
-
       if (token && user) {
         localStorage.setItem("token", token);
         localStorage.setItem("user", JSON.stringify(user));
 
-        // Navigate based on role
-        if (user.role === "admin") {
-          navigate("/admin/dashboard");
-        } else if (user.role === "recruiter") {
-          navigate("/recruiter/dashboard");
-        } else {
-          navigate("/user/jobs");
-        }
+        if (user.role === "admin") navigate("/admin/dashboard");
+        else if (user.role === "recruiter") navigate("/recruiter/dashboard");
+        else navigate("/user/jobs");
       } else {
         setError("Invalid response from server");
       }
     } catch (err) {
-      console.error("Login error:", err);
-      setError(err.response?.data?.message || "Invalid credentials or server error");
+      const msg = err.response?.data?.message || "Invalid credentials or server error";
+      setError(msg);
+
+      // 👇 detect if it's an unverified email error
+      if (msg.includes("verify your email")) {
+        setUnverifiedEmail(email);
+      }
     } finally {
       setLoading(false);
+    }
+  };
+
+  // Resend verification email
+  const resendVerification = async () => {
+    try {
+      const res = await axios.post("http://127.0.0.1:5000/api/users/resend-verification", {
+        email: unverifiedEmail,
+      });
+      alert(res.data.message || "Verification email sent again!");
+    } catch (err) {
+      alert(err.response?.data?.message || "Failed to resend verification link");
     }
   };
 
@@ -99,6 +109,22 @@ const Login = () => {
           {/* Error Message */}
           {error && (
             <p className="text-red-500 text-sm text-center mb-4">{error}</p>
+          )}
+
+          {/* Unverified email message */}
+          {unverifiedEmail && (
+            <div className="text-center mb-4">
+              <p className="text-yellow-600 text-sm mb-2">
+                Didn’t receive verification email?
+              </p>
+              <button
+                type="button"
+                onClick={resendVerification}
+                className="text-green-600 font-semibold hover:underline"
+              >
+                Resend Verification Link
+              </button>
+            </div>
           )}
 
           {/* Forgot Password */}

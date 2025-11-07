@@ -10,6 +10,7 @@ import RecruiterApplicants from "./admin/RecruiterApplicants";
 
 import Login from "./pages/Login";
 import Signup from "./pages/SignUp";
+import ResendVerification from "./pages/ResendVerification";
 
 import Dashboard from "./admin/RecruiterDashboard";
 import JobManagement from "./admin/JobManagement";
@@ -55,6 +56,7 @@ const AppContent = () => {
         <Route path="/about" element={<div>About</div>} />
         <Route path="/sign-up" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/resend-verification" element={<ResendVerification />} />
 
         {/* Recruiter Routes with Layout */}
        <Route path="/recruiter" element={<RecruiterLayout />}>
