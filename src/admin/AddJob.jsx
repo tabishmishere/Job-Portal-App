@@ -1,4 +1,3 @@
-// src/admin/AddJob.jsx
 import React, { useState, useEffect } from "react";
 import { createJob, getJobById, updateJob } from "../api/JobApi.jsx";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -23,7 +22,7 @@ const AddJob = () => {
   const editJobId = searchParams.get("edit");
   const isEditMode = Boolean(editJobId);
 
-  // If in edit mode, fetch job data to prefill
+  // If in edit mode, fetch job data 
   useEffect(() => {
     const fetchJob = async () => {
       if (!editJobId) return;
