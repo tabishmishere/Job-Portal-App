@@ -113,6 +113,7 @@ const JobManagement = () => {
                 <p className="text-sm text-gray-500">Applicants</p>
                 <p className="text-base text-gray-700">{job.applicantCount ?? 0}</p>
               </div>
+
               <div className="flex space-x-4 pt-2">
                 <button onClick={() => handleDelete(job._id)} className="text-gray-600 hover:text-red-600 transition-all">
                   <MdDelete className="text-xl" />

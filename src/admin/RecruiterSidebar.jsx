@@ -1,40 +1,28 @@
-import React from "react";
+// src/admin/RecruiterSidebar.jsx
+import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FaUser, FaBriefcase, FaSignOutAlt } from "react-icons/fa";
+import { FaBriefcase, FaSignOutAlt } from "react-icons/fa";
 import { FaCirclePlus } from "react-icons/fa6";
 import { IoPersonSharp } from "react-icons/io5";
 import { PiPersonSimpleRunBold } from "react-icons/pi";
+import { FaUser } from "react-icons/fa";
 
 const RecruiterSidebar = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const u = JSON.parse(localStorage.getItem("user") || "null");
+    setUser(u);
+  }, []);
 
   const menuItems = [
-    {
-      name: "Dashboard",
-      icon: <FaUser className="font-bold text-2xl" />,
-      path: "/recruiter/dashboard",
-    },
-    {
-      name: "My Profile",
-      icon: <IoPersonSharp className="font-bold text-2xl" />,
-      path: "/recruiter/profile",
-    },
-    {
-      name: "Add Job",
-      icon: <FaCirclePlus className="font-bold text-2xl" />,
-      path: "/recruiter/add-job",
-    },
-    {
-      name: "Manage Jobs",
-      icon: <FaBriefcase className="font-bold text-2xl" />,
-      path: "/recruiter/job-management",
-    },
-    {
-      name: "Applicants",
-      icon: <PiPersonSimpleRunBold className="font-bold text-2xl" />,
-      path: "/recruiter/applicants",
-    },
+    { name: "Dashboard", icon: <FaUser className="font-bold text-2xl" />, path: "/recruiter/dashboard" },
+    { name: "My Profile", icon: <IoPersonSharp className="font-bold text-2xl" />, path: "/recruiter/profile" },
+    { name: "Add Job", icon: <FaCirclePlus className="font-bold text-2xl" />, path: "/recruiter/add-job" },
+    { name: "Manage Jobs", icon: <FaBriefcase className="font-bold text-2xl" />, path: "/recruiter/job-management" },
+    { name: "Applicants", icon: <PiPersonSimpleRunBold className="font-bold text-2xl" />, path: "/recruiter/applicants" },
   ];
 
   const handleLogout = () => {
@@ -44,26 +32,23 @@ const RecruiterSidebar = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen justify-between bg-white">
-      {/* User Info */}
-      <div className="p-8 text-center">
+    <div className="flex flex-col h-screen justify-between bg-white shadow-lg">
+      <div className="p-6 text-center border-b">
         <img
-          src="https://media.licdn.com/dms/image/v2/D4D35AQE6TxKWU9n4Ug/profile-framedphoto-shrink_400_400/B4DZoaSfWcGkAc-/0/1761377646288?e=1762250400&v=beta&t=8BypDEAGYsgIv1e-xje2btNduKo3BgT48fuzdvh3fD0"
+          src={ user?.profile?.avatar ? `http://localhost:5000/api${user.profile.avatar}` : "/default-avatar.png" }
           alt="User"
-          className="w-20 h-20 mx-auto rounded-full border-4 border-[#b6ef72] shadow-md"
+          className="w-20 h-20 mx-auto rounded-full border-4 border-[#b6ef72] object-cover"
         />
-        <h3 className="mt-4 text-xl font-semibold text-gray-800">
-          Komal Qureshi
+        <h3 className="mt-3 text-xl font-semibold text-gray-800">
+          {user?.name || "Recruiter"}
         </h3>
-        <p className="text-sm text-gray-500">Senior Recruiter</p>
-
-        {/* Stylish Divider */}
-        <hr className="mt-6 border-t-2 w-4/5 mx-auto" />
+        <p className="text-sm text-gray-500 truncate wrap-break-word w-full text-ellipsis">
+  {user?.email || ""}
+</p>
       </div>
 
-      {/* Menu */}
-      <nav className="flex-1 px-6 space-y-3">
-        <ul className="space-y-3">
+      <nav className="flex-1 p-5">
+        <ul className="space-y-4">
           {menuItems.map((item, index) => {
             const active = location.pathname === item.path;
             return (
@@ -71,9 +56,7 @@ const RecruiterSidebar = () => {
                 <Link
                   to={item.path}
                   className={`flex items-center gap-4 px-5 py-3 rounded-xl text-lg font-medium transition-all duration-200 ${
-                    active
-                      ? "bg-green-900 text-white shadow-md"
-                      : "text-gray-700 hover:bg-[#dcfce7] hover:text-[#166534]"
+                    active ? "bg-green-900 text-white shadow-md" : "text-gray-700 hover:bg-[#dcfce7] hover:text-[#166534]"
                   }`}
                 >
                   <span className="text-xl">{item.icon}</span>
@@ -85,24 +68,18 @@ const RecruiterSidebar = () => {
         </ul>
       </nav>
 
-      {/* Footer */}
-      <div className="p-6">
-        <hr className="mb-5 border-t-2 w-4/5 mx-auto" />
-
-        <div className="mb-5">
-          <p className="text-sm text-gray-600 mb-2">Profile Completion</p>
+      <div className="p-5 border-t">
+        <div className="mb-4">
+          <p className="text-sm text-gray-600 mb-1">Profile Complete</p>
           <div className="w-full bg-gray-200 rounded-full h-2">
-            <div
-              className="bg-green-500 h-2 rounded-full"
-              style={{ width: "100%" }}
-            ></div>
+            <div className="bg-[rgb(74,222,128)] h-2 rounded-full" style={{ width: "100%" }}></div>
           </div>
           <span className="text-xs text-gray-500 mt-1 inline-block">100%</span>
         </div>
 
         <button
           onClick={handleLogout}
-          className="flex items-center gap-3 w-full cursor-pointer px-5 py-3 rounded-xl text-gray-700 font-medium hover:text-red-600 hover:bg-red-50 transition-all"
+          className="flex items-center gap-4 mb-10 w-full cursor-pointer px-5 py-3 rounded-xl text-gray-700 font-medium hover:text-red-600 hover:bg-red-50 transition-all"
         >
           <FaSignOutAlt className="text-xl" />
           Logout

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
+import JobForm from "../components/Admin/JobForm";
 
 const JobApplicants = () => {
   const [postedJobs, setPostedJobs] = useState([
@@ -16,7 +17,7 @@ const JobApplicants = () => {
     {
       id: 2,
       userName: "Arsal Majid",
-      title: "MERN Stack Developer",
+      title: "Mern Stack Developer",
       location: "Lahore",
       applicants: 18,
       status: "Rejected",
@@ -50,6 +51,7 @@ const JobApplicants = () => {
       resume: "https://example.com/resume1.pdf",
     },
   ]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleStatusChange = (id, status) => {
     setPostedJobs((prevJobs) =>
@@ -67,13 +69,13 @@ const JobApplicants = () => {
       </div>
 
       <div className="bg-white rounded-xl shadow-lg">
-        {/* Desktop Table */}
+        {/* Table View for larger screens */}
         <div className="hidden md:block overflow-x-auto">
           <table className="min-w-full table-auto text-sm">
             <thead>
               <tr>
                 <th className="py-4 px-6 text-left font-medium text-gray-900">
-                  ID
+                  Id
                 </th>
                 <th className="py-4 px-6 text-left font-medium text-gray-900">
                   User Name
@@ -85,16 +87,10 @@ const JobApplicants = () => {
                   Location
                 </th>
                 <th className="py-4 px-6 text-left font-medium text-gray-900">
-                  No of Jobs
-                </th>
-                <th className="py-4 px-6 text-left font-medium text-gray-900">
                   Resume
                 </th>
                 <th className="py-4 px-6 text-left font-medium text-gray-900">
                   Status
-                </th>
-                <th className="py-4 px-6 text-left font-medium text-gray-900">
-                  Action
                 </th>
               </tr>
             </thead>
@@ -109,10 +105,7 @@ const JobApplicants = () => {
                     <td className="py-4 px-6 text-gray-800">{job.userName}</td>
                     <td className="py-4 px-6 text-gray-800">{job.title}</td>
                     <td className="py-4 px-6 text-gray-600">{job.location}</td>
-                    <td className="py-4 px-6 text-gray-600">
-                      {job.applicants}
-                    </td>
-                    <td className="py-4 px-6">
+                     <td className="py-4 px-6">
                       {job.resume ? (
                         <a
                           href={job.resume}
@@ -126,34 +119,36 @@ const JobApplicants = () => {
                         <span className="text-gray-500">No Resume</span>
                       )}
                     </td>
-                    <td className="py-4 px-6">
+                    <td className="py-4 px-6 text-gray-600">
                       <span
-                        className={`font-semibold ${
+                        className={
                           job.status === "Accepted"
                             ? "text-green-600"
                             : "text-red-600"
-                        }`}
+                        }
                       >
                         {job.status}
                       </span>
                     </td>
                     <td className="py-4 px-6">
-                      <select
-                        value={job.status}
-                        onChange={(e) =>
-                          handleStatusChange(job.id, e.target.value)
-                        }
-                        className="bg-white text-sm text-gray-700 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-300"
-                      >
-                        <option value="Accepted">Accept</option>
-                        <option value="Rejected">Reject</option>
-                      </select>
+                      <div className="flex space-x-4">
+                        <select
+                          value={job.status}
+                          onChange={(e) =>
+                            handleStatusChange(job.id, e.target.value)
+                          }
+                          className="bg-white text-sm text-gray-700 border border-gray-300 rounded-md shadow-sm"
+                        >
+                          <option value="Accepted">Accept</option>
+                          <option value="Rejected">Reject</option>
+                        </select>
+                      </div>
                     </td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan="8" className="text-center py-6 text-gray-500">
+                  <td colSpan="7" className="text-center text-gray-500">
                     No job applicants yet.
                   </td>
                 </tr>
@@ -171,14 +166,10 @@ const JobApplicants = () => {
                 className="bg-gray-50 rounded-lg p-4 shadow border border-gray-200"
               >
                 <div className="mb-2">
-                  <p className="text-sm text-gray-500">User Name</p>
+                  <p className="text-sm text-gray-500">Job Title</p>
                   <p className="text-base font-semibold text-gray-800">
                     {job.userName}
                   </p>
-                </div>
-                <div className="mb-2">
-                  <p className="text-sm text-gray-500">Job Title</p>
-                  <p className="text-base text-gray-700">{job.title}</p>
                 </div>
                 <div className="mb-2">
                   <p className="text-sm text-gray-500">Location</p>
@@ -194,7 +185,6 @@ const JobApplicants = () => {
                     <a
                       href={job.resume}
                       target="_blank"
-                      rel="noopener noreferrer"
                       className="text-green-600 hover:underline"
                     >
                       View Resume
@@ -206,11 +196,11 @@ const JobApplicants = () => {
                 <div className="mb-2">
                   <p className="text-sm text-gray-500">Status</p>
                   <span
-                    className={`font-semibold ${
+                    className={
                       job.status === "Accepted"
                         ? "text-green-600"
                         : "text-red-600"
-                    }`}
+                    }
                   >
                     {job.status}
                   </span>

@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 
 const RecruiterLayout = () => {
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="flex min-h-screen overflow-hidden">
       {/* Sidebar */}
       <div className="w-64 border-r border-gray-200">
         <RecruiterSidebar />

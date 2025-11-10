@@ -45,8 +45,8 @@ const UserSettings = () => {
       const token = localStorage.getItem("token");
 
       const res = await axios.put(
-        `http://localhost:5000/api/user/${user._id || user.id}`,
-        formData,
+        `http://localhost:5000/api/users/${user._id || user.id}`,
+  formData,
         {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -64,32 +64,22 @@ const UserSettings = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-100 p-6 md:p-12">
-      <h1 className="text-4xl font-extrabold text-gray-900 mb-10 text-center">
-        Personal Settings
-      </h1>
+    <div className="min-h-screen bg-gray-50 p-6 md:p-12">
+      <h1 className="text-4xl font-bold text-gray-900 mb-8">Personal Settings</h1>
 
       <form
-        className="bg-white/70 backdrop-blur-xl border border-gray-200 p-8 rounded-3xl shadow-xl max-w-2xl mx-auto space-y-6 hover:shadow-2xl transition-all duration-300"
+        className="bg-white p-8 rounded-xl shadow-md max-w-2xl mx-auto space-y-6"
         onSubmit={handleUpdate}
       >
-        {success && (
-          <p className="text-green-600 bg-green-50 border border-green-200 rounded-lg py-2 px-4 text-center font-medium">
-            {success}
-          </p>
-        )}
-        {error && (
-          <p className="text-red-600 bg-red-50 border border-red-200 rounded-lg py-2 px-4 text-center font-medium">
-            {error}
-          </p>
-        )}
+        {success && <p className="text-green-600">{success}</p>}
+        {error && <p className="text-red-600">{error}</p>}
 
         {/* Name */}
         <div>
-          <label className="block text-gray-700 font-semibold mb-2">Full Name</label>
+          <label className="block text-gray-700 font-semibold mb-2">Name</label>
           <input
             type="text"
-            className="w-full p-3 border border-gray-300 rounded-xl bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-green-500 transition"
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
@@ -100,7 +90,7 @@ const UserSettings = () => {
           <label className="block text-gray-700 font-semibold mb-2">Email</label>
           <input
             type="email"
-            className="w-full p-3 border border-gray-300 rounded-xl bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-green-500 transition"
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -110,8 +100,7 @@ const UserSettings = () => {
         <div>
           <label className="block text-gray-700 font-semibold mb-2">Bio</label>
           <textarea
-            className="w-full p-3 border border-gray-300 rounded-xl bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-green-500 transition resize-none"
-            rows="4"
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
             value={bio}
             onChange={(e) => setBio(e.target.value)}
           />
@@ -124,7 +113,7 @@ const UserSettings = () => {
           </label>
           <input
             type="text"
-            className="w-full p-3 border border-gray-300 rounded-xl bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-green-500 transition"
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
             value={skills}
             onChange={(e) => setSkills(e.target.value)}
           />
@@ -132,28 +121,20 @@ const UserSettings = () => {
 
         {/* Avatar */}
         <div>
-          <label className="block text-gray-700 font-semibold mb-2">
-            Profile Photo
-          </label>
-          <div className="flex items-center space-x-4">
-            <input
-              type="file"
-              onChange={handleAvatarChange}
-              className="text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-100 file:text-green-700 hover:file:bg-green-200 transition"
+          <label className="block text-gray-700 font-semibold mb-2">Profile Photo</label>
+          <input type="file" onChange={handleAvatarChange} />
+          {user?.profile?.avatar && !avatar && (
+            <img
+              src={user.profile.avatar}
+              alt="Profile"
+              className="w-20 h-20 rounded-full mt-3"
             />
-            {user?.profile?.avatar && !avatar && (
-              <img
-                src={user.profile.avatar}
-                alt="Profile"
-                className="w-16 h-16 rounded-full border-4 border-green-500 shadow-md object-cover"
-              />
-            )}
-          </div>
+          )}
         </div>
 
         <button
           type="submit"
-          className="w-full bg-green-600 text-white font-semibold py-3 px-6 rounded-xl hover:bg-green-700 active:bg-green-800 shadow-md hover:shadow-lg transition-all duration-300"
+          className="bg-green-600 text-white font-semibold py-3 px-6 rounded-full hover:bg-green-700 transition duration-200"
         >
           Update Profile
         </button>
