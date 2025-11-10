@@ -1,13 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const UserDashboard = () => {
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem("user"));
+  const [user, setUser] = useState(null);
 
-  if (!user) {
-    navigate("/login"); // Redirect if not logged in
-  }
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    if (!storedUser) {
+      navigate("/login");
+    } else {
+      setUser(storedUser);
+    }
+  }, [navigate]);
+
+  // Update user when localStorage changes
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const updatedUser = JSON.parse(localStorage.getItem("user"));
+      setUser(updatedUser);
+    };
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
+
+  if (!user) return null;
 
   return (
     <div className="min-h-screen bg-gray-50 p-6 md:p-12">
@@ -68,11 +85,7 @@ const UserDashboard = () => {
         </div>
       </div>
 
-      {/* Optional: Recent Activity / Stats */}
-      <div className="bg-white p-6 rounded-xl shadow-md mt-8">
-        <h3 className="text-2xl font-bold mb-4">Recent Activity</h3>
-        <p className="text-gray-500">You haven’t applied to any jobs yet.</p>
-      </div>
+      
     </div>
   );
 };

@@ -10,7 +10,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [unverifiedEmail, setUnverifiedEmail] = useState(""); // 👈 for resend link
+  const [unverifiedEmail, setUnverifiedEmail] = useState(""); 
 
   // Redirect if already logged in
   useEffect(() => {

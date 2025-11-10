@@ -17,12 +17,12 @@ const AddJob = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Check if ?edit=<jobId> exists in URL
+  
   const searchParams = new URLSearchParams(location.search);
   const editJobId = searchParams.get("edit");
   const isEditMode = Boolean(editJobId);
 
-  // If in edit mode, fetch job data to prefill
+
   useEffect(() => {
     const fetchJob = async () => {
       if (!editJobId) return;
@@ -57,7 +57,7 @@ const AddJob = () => {
     fetchJob();
   }, [editJobId]);
 
-  // Handle input change
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name.startsWith("company.")) {
@@ -68,7 +68,6 @@ const AddJob = () => {
     }
   };
 
-  // Handle submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);

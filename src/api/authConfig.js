@@ -1,15 +1,18 @@
-// frontend/src/api/authConfig.js
-export const getAuthConfig = () => {
-  // adjust according to how you store token in login response
-  const token = localStorage.getItem("token") || (() => {
-    const u = JSON.parse(localStorage.getItem("user") || "null");
-    return u?.token || u?.data?.token || "";
-  })();
+export const getAuthConfig = (isFormData = false) => {
+  let token = localStorage.getItem("token");
 
-  return {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: token ? `Bearer ${token}` : "",
-    },
+  if (!token) {
+    const storedUser = JSON.parse(localStorage.getItem("user") || "null");
+    token = storedUser?.token || storedUser?.data?.token || "";
+  }
+
+  const headers = {
+    Authorization: token ? `Bearer ${token}` : "",
   };
+
+  if (!isFormData) {
+    headers["Content-Type"] = "application/json";
+  }
+
+  return { headers };
 };

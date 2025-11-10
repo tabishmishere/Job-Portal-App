@@ -1,13 +1,21 @@
-import React from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom"; 
-import { FaUser, FaBriefcase, FaSignOutAlt } from "react-icons/fa";
+// src/admin/RecruiterSidebar.jsx
+import React, { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { FaBriefcase, FaSignOutAlt } from "react-icons/fa";
 import { FaCirclePlus } from "react-icons/fa6";
 import { IoPersonSharp } from "react-icons/io5";
 import { PiPersonSimpleRunBold } from "react-icons/pi";
+import { FaUser } from "react-icons/fa";
 
 const RecruiterSidebar = () => {
   const location = useLocation();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const u = JSON.parse(localStorage.getItem("user") || "null");
+    setUser(u);
+  }, []);
 
   const menuItems = [
     { name: "Dashboard", icon: <FaUser className="font-bold text-2xl" />, path: "/recruiter/dashboard" },
@@ -17,30 +25,28 @@ const RecruiterSidebar = () => {
     { name: "Applicants", icon: <PiPersonSimpleRunBold className="font-bold text-2xl" />, path: "/recruiter/applicants" },
   ];
 
-
   const handleLogout = () => {
-    // Clear auth data
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-
-    // Redirect to login
     navigate("/login");
   };
 
   return (
     <div className="flex flex-col h-screen justify-between bg-white shadow-lg">
-      {/* User Info */}
       <div className="p-6 text-center border-b">
         <img
-          src="https://media.licdn.com/dms/image/v2/D4D35AQE6TxKWU9n4Ug/profile-framedphoto-shrink_400_400/B4DZoaSfWcGkAc-/0/1761377646288?e=1762250400&v=beta&t=8BypDEAGYsgIv1e-xje2btNduKo3BgT48fuzdvh3fD0"
+          src={ user?.profile?.avatar ? `http://localhost:5000/api${user.profile.avatar}` : "/default-avatar.png" }
           alt="User"
-          className="w-20 h-20 mx-auto rounded-full border-4 border-[#b6ef72]"
+          className="w-20 h-20 mx-auto rounded-full border-4 border-[#b6ef72] object-cover"
         />
-        <h3 className="mt-3 text-xl font-semibold text-gray-800">Komal Qureshi</h3>
-        <p className="text-sm text-gray-500">Senior Recruiter</p>
+        <h3 className="mt-3 text-xl font-semibold text-gray-800">
+          {user?.name || "Recruiter"}
+        </h3>
+        <p className="text-sm text-gray-500 truncate wrap-break-word w-full text-ellipsis">
+  {user?.email || ""}
+</p>
       </div>
 
-      {/* Menu */}
       <nav className="flex-1 p-5">
         <ul className="space-y-4">
           {menuItems.map((item, index) => {
@@ -50,9 +56,7 @@ const RecruiterSidebar = () => {
                 <Link
                   to={item.path}
                   className={`flex items-center gap-4 px-5 py-3 rounded-xl text-lg font-medium transition-all duration-200 ${
-                    active
-                      ? "bg-green-900 text-white shadow-md"
-                      : "text-gray-700 hover:bg-[#dcfce7] hover:text-[#166534]"
+                    active ? "bg-green-900 text-white shadow-md" : "text-gray-700 hover:bg-[#dcfce7] hover:text-[#166534]"
                   }`}
                 >
                   <span className="text-xl">{item.icon}</span>
@@ -68,10 +72,7 @@ const RecruiterSidebar = () => {
         <div className="mb-4">
           <p className="text-sm text-gray-600 mb-1">Profile Complete</p>
           <div className="w-full bg-gray-200 rounded-full h-2">
-            <div
-              className="bg-[rgb(74,222,128)] h-2 rounded-full"
-              style={{ width: "100%" }}
-            ></div>
+            <div className="bg-[rgb(74,222,128)] h-2 rounded-full" style={{ width: "100%" }}></div>
           </div>
           <span className="text-xs text-gray-500 mt-1 inline-block">100%</span>
         </div>

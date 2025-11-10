@@ -45,7 +45,7 @@ const UserSettings = () => {
       const token = localStorage.getItem("token");
 
       const res = await axios.put(
-        `http://localhost:5000/api/user/${user._id || user.id}`,
+        `http://localhost:5000/api/users/${user._id || user.id}`,
   formData,
         {
           headers: {
