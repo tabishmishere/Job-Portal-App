@@ -48,7 +48,7 @@ const JobManagement = () => {
   };
 
   return (
-    <div className="flex-1 p-4 sm:p-8 bg-[rgba(211,239,224,0.3)] rounded-xl shadow-lg min-h-screen">
+    <div className="flex-1 p-4 sm:p-8 bg-[rgba(211,239,224,0.3)]   rounded-xl shadow-lg min-h-screen">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
         <h2 className="text-3xl sm:text-4xl font-bold text-green-900"> Job Management </h2>
       </div>

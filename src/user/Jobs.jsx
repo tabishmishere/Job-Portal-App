@@ -1,4 +1,3 @@
-// frontend/src/pages/Jobs.jsx
 import React, { useState, useEffect } from "react";
 import { FiMapPin, FiClock } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";

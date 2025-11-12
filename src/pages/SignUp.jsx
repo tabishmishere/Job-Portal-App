@@ -8,14 +8,14 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-   const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-      const userData = {
-    name: name.trim(),
-    email: email.trim().toLowerCase(),
-    password: password.trim(),
-  };
+    const userData = {
+      name: name.trim(),
+      email: email.trim().toLowerCase(),
+      password: password.trim(),
+    };
 
     try {
       const res = await fetch("http://localhost:5000/api/users/signup", {
@@ -29,12 +29,8 @@ const Signup = () => {
       const data = await res.json();
 
       if (res.ok) {
-        // alert("Signup successful!");
         console.log(data);
         navigate("/login");
-        
-        // Optionally redirect to login
-        // window.location.href = "/login";
       } else {
         alert(data.message);
       }

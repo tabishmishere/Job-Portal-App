@@ -43,63 +43,84 @@ const RecruiterApplicants = () => {
   if (loading) return <p>Loading...</p>;
 
   return (
-    <div className="p-6 min-h-screen bg-gray-100">
-      <h2 className="text-3xl font-bold mb-6 text-center">Applicants</h2>
-      {applications.length === 0 ? (
-        <p>No applications yet.</p>
-      ) : (
-        <table className="w-full border-collapse bg-white shadow-lg rounded-lg overflow-hidden">
-          <thead className="bg-gray-50 border-b">
-            <tr>
-              <th className="p-3">Name</th>
-              <th className="p-3">Email</th>
-              <th className="p-3">Education</th>
-              <th className="p-3">Experience</th>
-              <th className="p-3">Skills</th>
-              <th className="p-3">CV</th>
-              <th className="p-3">Job Title</th>
-              <th className="p-3">Status</th>
-              <th className="p-3">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {applications.map((app) => (
-              <tr key={app._id} className="border-b hover:bg-gray-50">
-                <td className="p-3">{app.applicantId?.name}</td>
-                <td className="p-3">{app.applicantId?.email}</td>
-                <td className="p-3">{app.education || "N/A"}</td>
-                <td className="p-3">{app.experience || "N/A"}</td>
-                <td className="p-3">{app.skills?.join(", ") || "N/A"}</td>
-                <td className="p-3">
-                  {app.cv ? (
-                    <a
-                      href={`http://localhost:5000${app.cv}`}
-                      target="_blank"
-                      className="text-blue-500 underline"
-                    >
-                      View CV
-                    </a>
-                  ) : (
-                    "N/A"
-                  )}
-                </td>
-                <td className="p-3">{app.jobId?.title}</td>
-                <td className="p-3">{app.status}</td>
-                <td className="p-3">
-                  <div className="flex gap-2">
-                    <button onClick={() => updateStatus(app._id, "accepted")} className="bg-green-500 text-white px-5 py-2 rounded cursor-pointer hover:bg-green-600">
-                      Accept
-                    </button>
-                    <button onClick={() => updateStatus(app._id, "rejected")} className="bg-red-500 text-white px-5 py-2 rounded cursor-pointer hover:bg-red-600">
-                      Reject
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+    <div className="min-h-screen bg-[rgba(211,239,224,0.3)] p-6">
+      <div className="max-w-7xl mx-auto rounded-lg p-6">
+        <h2 className="text-3xl font-semibold mb-6 text-center text-green-800">
+          Job Applicants
+        </h2>
+
+        {applications.length === 0 ? (
+          <p className="text-center text-gray-600">No applications yet.</p>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse rounded-lg overflow-hidden">
+              <thead className="bg-green-100 text-gray-800">
+                <tr>
+                  <th className="p-3 text-left font-semibold">Name</th>
+                  <th className="p-3 text-left font-semibold">Email</th>
+                  <th className="p-3 text-left font-semibold">Education</th>
+                  <th className="p-3 text-left font-semibold">Experience</th>
+                  <th className="p-3 text-left font-semibold">Skills</th>
+                  <th className="p-3 text-left font-semibold">CV</th>
+                  <th className="p-3 text-left font-semibold">Job Title</th>
+                  <th className="p-3 text-left font-semibold">Status</th>
+                  <th className="p-3 text-center font-semibold">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {applications.map((app, index) => (
+                  <tr
+                    key={app._id}
+                    className={`border-b ${
+                      index % 2 === 0 ? "bg-white" : "bg-gray-50"
+                    } hover:bg-gray-100 transition`}
+                  >
+                    <td className="p-3">{app.applicantId?.name}</td>
+                    <td className="p-3">{app.applicantId?.email}</td>
+                    <td className="p-3">{app.education || "N/A"}</td>
+                    <td className="p-3">{app.experience || "N/A"}</td>
+                    <td className="p-3">{app.skills?.join(", ") || "N/A"}</td>
+                    <td className="p-3">
+                      {app.cv ? (
+                        <a
+                          href={`http://localhost:5000${app.cv}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-600 underline hover:text-blue-800"
+                        >
+                          View CV
+                        </a>
+                      ) : (
+                        "N/A"
+                      )}
+                    </td>
+                    <td className="p-3">{app.jobId?.title}</td>
+                    <td className="p-3 capitalize font-medium text-gray-700">
+                      {app.status}
+                    </td>
+                    <td className="p-3 text-center">
+                      <div className="flex items-center justify-center gap-2">
+                        <button
+                          onClick={() => updateStatus(app._id, "accepted")}
+                          className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition"
+                        >
+                          Accept
+                        </button>
+                        <button
+                          onClick={() => updateStatus(app._id, "rejected")}
+                          className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition"
+                        >
+                          Reject
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
