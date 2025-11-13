@@ -46,7 +46,7 @@ const UserSettings = () => {
 
       const res = await axios.put(
         `http://localhost:5000/api/users/${user._id || user.id}`,
-  formData,
+        formData,
         {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -65,21 +65,23 @@ const UserSettings = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 p-6 md:p-12">
-      <h1 className="text-4xl font-bold text-gray-900 mb-8">Personal Settings</h1>
+      <h1 className="text-4xl text-center font-bold text-gray-900 mb-8">
+        Personal Settings
+      </h1>
 
       <form
-        className="bg-white p-8 rounded-xl shadow-md max-w-2xl mx-auto space-y-6"
+        className="bg-white p-10 rounded-3xl shadow-2xl max-w-2xl mx-auto space-y-6"
         onSubmit={handleUpdate}
       >
-        {success && <p className="text-green-600">{success}</p>}
-        {error && <p className="text-red-600">{error}</p>}
+        {success && <p className="text-green-600 font-medium">{success}</p>}
+        {error && <p className="text-red-600 font-medium">{error}</p>}
 
         {/* Name */}
         <div>
           <label className="block text-gray-700 font-semibold mb-2">Name</label>
           <input
             type="text"
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 shadow-sm"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
@@ -87,10 +89,12 @@ const UserSettings = () => {
 
         {/* Email */}
         <div>
-          <label className="block text-gray-700 font-semibold mb-2">Email</label>
+          <label className="block text-gray-700 font-semibold mb-2">
+            Email
+          </label>
           <input
             type="email"
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 shadow-sm"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -100,7 +104,8 @@ const UserSettings = () => {
         <div>
           <label className="block text-gray-700 font-semibold mb-2">Bio</label>
           <textarea
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            rows={4}
+            className="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 shadow-sm"
             value={bio}
             onChange={(e) => setBio(e.target.value)}
           />
@@ -113,7 +118,7 @@ const UserSettings = () => {
           </label>
           <input
             type="text"
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 shadow-sm"
             value={skills}
             onChange={(e) => setSkills(e.target.value)}
           />
@@ -121,20 +126,22 @@ const UserSettings = () => {
 
         {/* Avatar */}
         <div>
-          <label className="block text-gray-700 font-semibold mb-2">Profile Photo</label>
-          <input type="file" onChange={handleAvatarChange} />
+          <label className="block text-gray-700 font-semibold mb-2">
+            Profile Photo
+          </label>
+          <input type="file" onChange={handleAvatarChange} className="mb-3" />
           {user?.profile?.avatar && !avatar && (
             <img
               src={user.profile.avatar}
               alt="Profile"
-              className="w-20 h-20 rounded-full mt-3"
+              className="w-24 h-24 rounded-full border border-gray-200 shadow-md"
             />
           )}
         </div>
 
         <button
           type="submit"
-          className="bg-green-600 text-white font-semibold py-3 px-6 rounded-full hover:bg-green-700 transition duration-200"
+          className="w-full bg-green-600 text-white font-semibold py-3 rounded-2xl hover:bg-green-700 transition duration-300 shadow-md cursor-pointer"
         >
           Update Profile
         </button>

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { FiArrowLeft } from "react-icons/fi";
 
 const JobDetails = () => {
-  const { id } = useParams(); // job id from route
+  const { id } = useParams();
   const navigate = useNavigate();
   const [job, setJob] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -25,56 +26,95 @@ const JobDetails = () => {
         setLoading(false);
       }
     };
-
     fetchJob();
   }, [id]);
 
-  if (loading) return <p className="text-center mt-10">Loading job details...</p>;
-  if (error) return <p className="text-center mt-10 text-red-600">{error}</p>;
-  if (!job) return <p className="text-center mt-10 text-gray-600">Job not found</p>;
+  if (loading)
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-50">
+        <p className="text-lg text-gray-600 animate-pulse">
+          Loading job details...
+        </p>
+      </div>
+    );
+
+  if (error)
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-50">
+        <p className="text-red-600 text-lg font-medium">{error}</p>
+      </div>
+    );
+
+  if (!job)
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-50">
+        <p className="text-gray-600 text-lg">Job not found</p>
+      </div>
+    );
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6 md:p-12">
-      <button
-        className="mb-6 text-green-600 hover:underline"
-        onClick={() => navigate(-1)}
-      >
-        ← Back to Jobs
-      </button>
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-10 px-6">
+      <div className="max-w-5xl mx-auto">
+        {/* Back Button */}
+        <button
+          className="flex mt-5 items-center gap-2 mb-8 bg-green-600 p-5 rounded-full text-white cursor-pointer hover:bg-green-500 font-medium transition"
+          onClick={() => navigate(-1)}
+        >
+          <FiArrowLeft size={18} />
+          Back to Jobs
+        </button>
 
-      <div className="max-w-4xl mx-auto bg-white shadow-md rounded-2xl p-8">
-        <h1 className="text-3xl font-bold mb-4">{job.title || "Job Title"}</h1>
+        {/* Job Card */}
+        <div className="bg-white rounded-3xl shadow-md hover:shadow-xl transition-all duration-300 p-8 md:p-12 border border-gray-100">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6 border-b pb-6">
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
+              {job.title || "Job Title"}
+            </h1>
+            <span className="bg-green-100 text-green-700 text-sm font-medium px-4 py-2 rounded-full capitalize">
+              {job.jobType || "Full-time"}
+            </span>
+          </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+          {/* Job Info Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+            <div className="bg-gray-50 p-4 rounded-xl">
+              <p className="text-sm text-gray-500 font-medium">📍 Location</p>
+              <p className="text-lg font-semibold text-gray-800 mt-1">
+                {job.location || "Not specified"}
+              </p>
+            </div>
+
+            <div className="bg-gray-50 p-4 rounded-xl">
+              <p className="text-sm text-gray-500 font-medium">🏷️ Category</p>
+              <p className="text-lg font-semibold text-gray-800 mt-1">
+                {job.category || "N/A"}
+              </p>
+            </div>
+
+            <div className="bg-gray-50 p-4 rounded-xl">
+              <p className="text-sm text-gray-500 font-medium">💰 Salary</p>
+              <p className="text-lg font-semibold text-gray-800 mt-1">
+                {job.salaryRange || "Negotiable"}
+              </p>
+            </div>
+
+            <div className="bg-gray-50 p-4 rounded-xl">
+              <p className="text-sm text-gray-500 font-medium">🏢 Company</p>
+              <p className="text-lg font-semibold text-gray-800 mt-1">
+                {job.company?.name || "N/A"}
+              </p>
+            </div>
+          </div>
+
+          {/* Job Description */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">Job Location</label>
-            <p className="mt-1 text-gray-800">{job.location || "Not specified"}</p>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+              Job Description
+            </h2>
+            <p className="text-gray-700 leading-relaxed whitespace-pre-line">
+              {job.description || "No description available."}
+            </p>
           </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Job Category</label>
-            <p className="mt-1 text-gray-800">{job.category || "N/A"}</p>
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Job Type</label>
-            <p className="mt-1 text-gray-800">{job.jobType || "N/A"}</p>
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Salary</label>
-            <p className="mt-1 text-gray-800">{job.salaryRange || "Negotiable"}</p>
-          </div>
-
-          <div className="md:col-span-2">
-            <label className="block text-sm font-medium text-gray-700">Company Name</label>
-            <p className="mt-1 text-gray-800">{job.company?.name || "N/A"}</p>
-          </div>
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Job Description</label>
-          <p className="text-gray-700 whitespace-pre-line">{job.description || "No description available."}</p>
         </div>
       </div>
     </div>
