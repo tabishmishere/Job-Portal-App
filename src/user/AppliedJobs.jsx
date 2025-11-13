@@ -44,7 +44,9 @@ const AppliedJobs = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 p-6 md:p-12">
-      <h1 className="text-4xl font-extrabold text-gray-900 mb-8">My Applied Jobs</h1>
+      <h1 className="text-4xl font-extrabold text-gray-900 mb-8">
+        My Applied Jobs
+      </h1>
 
       {applications.length === 0 ? (
         <p className="text-gray-600 text-lg text-center">
@@ -61,7 +63,7 @@ const AppliedJobs = () => {
                 {app.job?.title || "Job Title"}
               </h2>
               <p className="text-gray-600 mb-1">
-                Company: {app.job?.company || "N/A"}
+                Company: {app.job?.company?.name || "N/A"}
               </p>
               <p className="text-gray-600 mb-1">
                 Status: <span className="capitalize">{app.status}</span>
@@ -71,7 +73,7 @@ const AppliedJobs = () => {
               </p>
 
               <button
-                onClick={() => navigate(`/jobs/${app.job?._id}`)}
+              onClick={() => navigate(`/jobs/${app.job?._id}`)}
                 className="mt-4 text-green-600 hover:underline"
               >
                 View Job Details →

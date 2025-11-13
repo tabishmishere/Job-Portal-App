@@ -50,7 +50,6 @@ const Login = () => {
       const msg = err.response?.data?.message || "Invalid credentials or server error";
       setError(msg);
 
-      // 👇 detect if it's an unverified email error
       if (msg.includes("verify your email")) {
         setUnverifiedEmail(email);
       }

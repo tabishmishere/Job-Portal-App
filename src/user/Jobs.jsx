@@ -37,7 +37,7 @@ const Jobs = () => {
   const [skills, setSkills] = useState("");
   const [coverLetter, setCoverLetter] = useState("");
 
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem("user") || "null");
   const token = localStorage.getItem("token");
 
   const handleLogout = () => {
@@ -115,7 +115,7 @@ const Jobs = () => {
   });
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       {/* Header */}
       <header className="flex justify-between items-center p-4 bg-white shadow-sm border-b">
         <p className="text-2xl font-extrabold text-black">
@@ -125,7 +125,7 @@ const Jobs = () => {
           <div className="relative">
             <img
               src={
-                user.profile?.avatar
+                user?.profile?.avatar
                   ? `http://localhost:5000${user.profile.avatar}`
                   : "/default-avatar.png"
               }
@@ -146,12 +146,6 @@ const Jobs = () => {
                   className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                 >
                   Applied Jobs
-                </button>
-                <button
-                  onClick={() => navigate("/user/settings")}
-                  className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                >
-                  Settings
                 </button>
                 <button
                   onClick={handleLogout}

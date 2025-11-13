@@ -32,9 +32,9 @@ import Profile from "./admin/Profile";
 // User Imports
 import Jobs from "./user/Jobs";
 import UserDashboard from "./admin/UserDashboard";
-import UserSettings from "./admin/ProfileSetting";
 import AdminProfile from "./admin/AdminProfile";
 import AppliedJobs from "./user/AppliedJobs";
+import JobDetails from "./user/JobDetails";
 
 const AppContent = () => {
   const location = useLocation();
@@ -96,8 +96,9 @@ const AppContent = () => {
         {/* User Routes */}
         <Route path="/user/jobs" element={<Jobs />} />
         <Route path="/user/dashboard" element={<UserDashboard />} />
-        <Route path="/user/profilesetting" element={<UserSettings />} />
         <Route path="/user/applied-jobs" element={<AppliedJobs />} />
+        <Route path="/jobs/:id" element={<JobDetails />} />
+
 
       </Routes>
 
