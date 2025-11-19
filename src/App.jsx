@@ -53,7 +53,8 @@ const AppContent = () => {
     "/user/dashboard",
     "/user/profilesetting",
     "/admin/profile",
-    "/user/applied-jobs"
+    "/user/applied-jobs",
+    "/jobs/"
 
   ];
 

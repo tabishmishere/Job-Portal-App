@@ -42,7 +42,9 @@ const AppliedJobs = () => {
   if (loading)
     return (
       <div className="flex items-center justify-center h-screen bg-gray-50">
-        <p className="text-lg text-gray-600 animate-pulse">Loading your jobs...</p>
+        <p className="text-lg text-gray-600 animate-pulse">
+          Loading your jobs...
+        </p>
       </div>
     );
 
@@ -82,7 +84,16 @@ const AppliedJobs = () => {
                     <h2 className="text-xl font-semibold text-gray-800 leading-snug line-clamp-2 pr-2">
                       {app.job?.title || "Untitled Job"}
                     </h2>
-                    <span className="bg-green-50 text-green-700 text-xs px-3 py-1 rounded-full capitalize whitespace-nowrap">
+                    <span
+                      className={`text-xs px-3 py-1 rounded-full capitalize whitespace-nowrap ${
+                        app.status === "accepted"
+                          ? "bg-green-100 text-green-700"
+                          : app.status === "rejected"
+                          ? "bg-red-100 text-red-700"
+                          : "bg-yellow-100 text-yellow-700"
+                      }
+                    `}
+                    >
                       {app.status || "Pending"}
                     </span>
                   </div>
@@ -90,10 +101,14 @@ const AppliedJobs = () => {
                   <div className="grid grid-cols-1 gap-2 text-gray-600 mb-4">
                     <p className="text-sm">
                       <span className="font-bold text-gray-700">Company:</span>{" "}
-                      <span className="text-gray-800">{app.job?.company?.name || "N/A"}</span>
+                      <span className="text-gray-800">
+                        {app.job?.company?.name || "N/A"}
+                      </span>
                     </p>
                     <p className="text-sm">
-                      <span className="font-bold text-gray-700">Applied on:</span>{" "}
+                      <span className="font-bold text-gray-700">
+                        Applied on:
+                      </span>{" "}
                       {new Date(app.createdAt).toLocaleDateString()}
                     </p>
                   </div>

@@ -1,4 +1,3 @@
-// src/admin/RecruiterDashboard.jsx
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { IoPersonOutline } from "react-icons/io5";

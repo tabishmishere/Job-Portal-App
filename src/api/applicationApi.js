@@ -1,4 +1,3 @@
-// frontend/src/api/applicationApi.js
 import axios from "axios";
 import { getAuthConfig } from "./authConfig.js";
 

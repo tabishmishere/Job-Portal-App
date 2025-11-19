@@ -45,7 +45,7 @@ const Jobs = () => {
     formData.append("education", education);
     formData.append("experience", experience);
     formData.append("skills", skills);
-    formData.append("coverLetter", coverLetter);
+    formData.append("message", coverLetter);
 
     try {
       const res = await axios.post(
@@ -204,7 +204,7 @@ const Jobs = () => {
                   <h3 className="text-lg font-semibold text-gray-900 leading-tight">
                     {job.title}
                   </h3>
-                  <span className="text-xs font-medium text-green-700 bg-green-100 px-3 py-1 rounded-full">
+                  <span className="text-xs whitespace-nowrap font-medium text-green-700 bg-green-100 px-3 py-1 rounded-full">
                     {job.jobType || "N/A"}
                   </span>
                 </div>

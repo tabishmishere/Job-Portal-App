@@ -1,4 +1,3 @@
-// src/api/adminApi.js
 import axios from "axios";
 import { getAuthConfig } from "./authConfig.js";
 import { API_URL } from "./index.js";
