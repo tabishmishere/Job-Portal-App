@@ -7,7 +7,7 @@ const AddJob = () => {
     title: "",
     description: "",
     location: "",
-    jobType: "Full-time",
+    jobType: "Full-Time",
     salaryRange: "",
     category: "Programming",
     company: { name: "", logo: "", website: "" },
@@ -154,7 +154,7 @@ const AddJob = () => {
               onChange={handleChange}
               className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
             >
-              <option>Full-time</option>
+              <option>Full-Time</option>
               <option>Part-time</option>
               <option>Remote</option>
               <option>Intern</option>

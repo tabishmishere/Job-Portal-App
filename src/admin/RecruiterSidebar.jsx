@@ -1,4 +1,3 @@
-// src/admin/RecruiterSidebar.jsx
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaBriefcase, FaSignOutAlt } from "react-icons/fa";

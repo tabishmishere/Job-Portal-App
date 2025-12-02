@@ -1,4 +1,3 @@
-// src/admin/Profile.jsx
 import React, { useEffect, useState } from "react";
 import { updateRecruiterProfile } from "../api/recruiterApi";
 

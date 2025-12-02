@@ -6,6 +6,8 @@ import {
   useLocation,
 } from "react-router-dom";
 
+import JobDetails from "./user/JobDetails.jsx"
+
 import Navbar from "./components/Navbar";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -52,7 +54,8 @@ const AppContent = () => {
     "/user/dashboard",
     "/user/profilesetting",
     "/admin/profile",
-    "/user/applied-jobs"
+    "/user/applied-jobs",
+    "/jobs"
 
   ];
 
@@ -95,6 +98,8 @@ const AppContent = () => {
 
         {/* User Routes */}
         <Route path="/user/jobs" element={<Jobs />} />
+        <Route path="/jobs/:id" element={<JobDetails />} />
+
         <Route path="/user/dashboard" element={<UserDashboard />} />
         <Route path="/user/profilesetting" element={<UserSettings />} />
         <Route path="/user/applied-jobs" element={<AppliedJobs />} />

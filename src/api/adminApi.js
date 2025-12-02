@@ -1,7 +1,6 @@
-// src/api/adminApi.js
 import axios from "axios";
 import { getAuthConfig } from "./authConfig.js";
-import { API_URL } from "./index.js"; // ensure API_URL is exported from src/api/index or similar
+import { API_URL } from "./index.js"; 
 
 const ADMIN_USERS = `${API_URL}/admin/users`;
 
@@ -14,7 +13,7 @@ export const updateAdminProfile = async (formData) => {
   const res = await axios.put(
     `${API_URL}/admin/profile`,
     formData,
-    getAuthConfig(true) // <-- true means skip Content-Type
+    getAuthConfig(true) 
   );
   return res.data;
 };
@@ -35,7 +34,7 @@ export const deleteUser = async (id) => {
 };
 
 export const fetchAllJobsAdmin = async () => {
-  const res = await axios.get(`${API_URL}/jobs`, getAuthConfig()); // public /api/jobs returns jobs; with auth config is fine
+  const res = await axios.get(`${API_URL}/jobs`, getAuthConfig()); 
   return res.data;
 };
 
@@ -49,7 +48,7 @@ export const fetchDashboardStats = async () => {
   return data; 
 };
 
-// Fetch recent jobs (limit param)
+
 export const fetchRecentJobs = async (limit = 3) => {
   const { data } = await axios.get(`${API_URL}/admin/jobs/recent?limit=${limit}`, getAuthConfig());
   return data.jobs;
@@ -60,7 +59,7 @@ export const fetchRecentUsers = async (limit = 3) => {
   return data.users;
 };
 
-// Delete job by ID
+
 export const deleteJobById = async (id) => {
   await axios.delete(`${API_URL}/admin/jobs/${id}`, getAuthConfig());
 };
